@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="jp" style="font-size:62.5%;">
+
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-954JYK1L13"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-954JYK1L13');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, shrink-to-fit=no">
+    <!-- ブックマークアイコン -->
+    <link rel="apple-touch-icon" href="https://i.gyazo.com/eb02f7e4849bf42ba1bb7b167229b102.png">
+    <!-- Android(一部) -->
+    <link rel="shortcut icon" href="https://i.gyazo.com/eb02f7e4849bf42ba1bb7b167229b102.png">
+    <!-- favicon -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>成蹊大学体育会柔道部公式ホームページ </title>
+    <meta name="description" content="成蹊大学体育会柔道部が運営し、各種情報を提供する総合情報サイトです！Twitter・facebook・YouTubeもぜひぜひチェック！" />
+    <meta name="keywords" content="成蹊,大学,体育会,柔道部" />
+    <meta name="google-site-verification" content="E4-zFJQlQepl0yvXwL53lSMc2s4e8eijYSAikMtElI4" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@seikeijudo" />
+    <meta property="og:url" content="https://seikei-university-judo-tg.netlify.app" />
+    <meta property="og:title" content="成蹊大学柔道部【公式HP】" />
+    <meta property="og:description" content="2019年6月に開設したWebサイトです！" />
+    <meta property="og:image" content="https://cdn.pixabay.com/photo/2014/03/24/17/07/bow-295101_1280.png">
+  </head>
+
+  <body style="color:#333;margin:0;font-size:1.2rem;">
+    <!--スクリプトが動作しないブラウザのために、 代わりに表示させる内容-->
+    <noscript>
+      <strong>申し訳ありませんが、JavaScriptが有効になっていないと「成蹊大学体育会柔道部公式ホームページ」が正しく機能しません。 続行するには有効にしてください。</strong>
+    </noscript>
+    <!-- アプリケーション -->
+    <div id="app"></div>
+    <!-- 戻るボタン -->
+    <div class="pagetop"><i class="fas fa-chevron-up"></i></div>
+    <!-- 読み込み -->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      //戻るボタン
+      $(document).ready(function() {
+        var offset = 100;
+        var duration = 500;
+
+        $(window).scroll(function() {
+          if (jQuery(this).scrollTop() > offset) {
+            $('.pagetop').fadeIn(duration);
+          } else {
+            $('.pagetop').fadeOut(duration);
+          }
+        });
+
+        $('.pagetop').click(function(event) {
+          event.preventDefault();
+          $('html, body').animate({scrollTop: 0}, duration);
+          return false;
+        })
+      });
+    </script>
+
+  </body>
+
+</html>

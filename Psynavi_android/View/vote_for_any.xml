@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--投票イベント(個別)のレイアウト-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".VoteForAny">
+
+    <TextView
+        android:id="@+id/voteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="投票イベントのタイトル"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/voteInfo"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#39AAAAAA"
+        android:padding="10dp"
+        android:text="投票イベントの説明"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/voteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2196F3"
+        android:text="投票する"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/choiseState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="単一選択"
+        android:textColor="@android:color/holo_red_light" />
+
+    <ListView
+        android:id="@+id/selectList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

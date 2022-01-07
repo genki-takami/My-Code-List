@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--議事録フォルダー追加画面のレイアアウト-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".FolderAdd">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <EditText
+            android:id="@+id/title_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="フォルダ名" />
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_edit_text"
+            android:layout_alignParentRight="true"
+            android:background="#2C7CFF"
+            android:text="決定"
+            android:textColor="@android:color/white"
+            tools:ignore="TextContrastCheck" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

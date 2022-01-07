@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--議事録追加画面のレイアウト-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MinuteAdd">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!--会議名-->
+            <TextView
+                android:id="@+id/meetingNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="会議名" />
+
+            <EditText
+                android:id="@+id/meetingNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/meetingNameTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="定例会など"
+                android:inputType="text" />
+
+            <!--書記-->
+            <TextView
+                android:id="@+id/minuteTakerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/meetingNameEditText"
+                android:layout_alignParentStart="true"
+                android:text="書記" />
+
+            <EditText
+                android:id="@+id/minuteTakerEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/minuteTakerTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="人物名"
+                android:inputType="text" />
+
+            <!--議題-->
+            <TextView
+                android:id="@+id/topicTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/minuteTakerEditText"
+                android:layout_alignParentStart="true"
+                android:text="議題" />
+
+            <EditText
+                android:id="@+id/topicEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topicTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="話し合う内容"
+                android:inputType="textMultiLine"
+                android:maxLines="2" />
+
+            <!--日時-->
+            <TextView
+                android:id="@+id/dateAndTimesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topicEditText"
+                android:layout_alignParentStart="true"
+                android:text="日時" />
+
+            <Button
+                android:id="@+id/date_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topicEditText"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/times_button"
+                android:text="----/--/--" />
+
+            <Button
+                android:id="@id/times_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/topicEditText"
+                android:layout_alignParentRight="true"
+                android:text="--:--" />
+
+            <!--場所-->
+            <TextView
+                android:id="@+id/placeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_button"
+                android:layout_alignParentStart="true"
+                android:text="場所" />
+
+            <TextView
+                android:id="@+id/registeredPlace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/times_button"
+                android:layout_alignParentEnd="true"
+                android:background="#2C7CFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="登録から選択"
+                android:textColor="@android:color/white"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/placeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/registeredPlace"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="会議場所"
+                android:inputType="textMultiLine"
+                android:maxLines="2" />
+
+            <!--出席者-->
+            <TextView
+                android:id="@+id/attendeeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/placeEditText"
+                android:layout_alignParentStart="true"
+                android:text="出席者" />
+
+            <TextView
+                android:id="@+id/registeredMember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/placeEditText"
+                android:layout_alignParentEnd="true"
+                android:background="#2C7CFF"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="登録から選択"
+                android:textColor="@android:color/white"
+                tools:ignore="TextContrastCheck" />
+
+            <EditText
+                android:id="@+id/attendeeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/registeredMember"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="出席者の名前"
+                android:inputType="textMultiLine"
+                android:maxLines="20" />
+
+            <!--会議内容-->
+            <TextView
+                android:id="@+id/meetingContentsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/attendeeEditText"
+                android:layout_alignParentStart="true"
+                android:text="会議内容" />
+
+            <EditText
+                android:id="@+id/meetingContentsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/meetingContentsTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="詳細をメモしよう"
+                android:inputType="textMultiLine"
+                android:maxLines="100" />
+
+            <!--決定事項-->
+            <TextView
+                android:id="@+id/decisionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/meetingContentsEditText"
+                android:layout_alignParentStart="true"
+                android:text="決定事項" />
+
+            <EditText
+                android:id="@+id/decisionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/decisionTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="最後に..."
+                android:inputType="textMultiLine"
+                android:maxLines="10" />
+
+            <!--備考-->
+            <TextView
+                android:id="@+id/noteTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/decisionEditText"
+                android:layout_alignParentStart="true"
+                android:text="備考" />
+
+            <EditText
+                android:id="@+id/noteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/noteTextView"
+                android:layout_alignParentStart="true"
+                android:gravity="top"
+                android:hint="ご自由に"
+                android:inputType="textMultiLine"
+                android:maxLines="20" />
+
+            <!--決定ボタン-->
+            <Button
+                android:id="@+id/done_button"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/noteEditText"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="10dp"
+                android:background="#2C7CFF"
+                android:text="決定"
+                android:textColor="@android:color/white"
+                tools:ignore="TextContrastCheck" />
+
+            <!--共有ボタン-->
+            <Button
+                android:id="@+id/share_button"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/noteEditText"
+                android:layout_toLeftOf="@id/done_button"
+                android:background="@android:color/holo_orange_light"
+                android:text="共有" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

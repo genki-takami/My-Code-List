@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--お知らせタブの基礎レイアウト-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".Notice">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/noticeTabTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="お知らせ"
+            android:textAlignment="center"
+            android:textColor="#2196F3"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/underLine_n"
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/noticeTabTitle"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/black" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/NoticeList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

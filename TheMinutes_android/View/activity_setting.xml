@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--設定画面のレイアウト-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context=".Setting">
+
+    <Button
+        android:id="@+id/toPlaceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="#2C7CFF"
+        android:text="登録会議スペース"
+        android:textColor="@android:color/white"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/toMemberButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#2C7CFF"
+        android:text="登録メンバー"
+        android:textColor="@android:color/white"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/toMinuteListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="BACK" />
+
+</LinearLayout>

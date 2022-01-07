@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--会議場所追加画面のレイアアウト-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
+        tools:context=".PlaceAdd">
+
+    <TextView
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="BACK"
+        android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/registerPlaceEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:gravity="top"
+            android:hint="登録したい場所を入力してボタンを押す"
+            android:inputType="textMultiLine"
+            android:maxLines="2"
+            android:textSize="15sp" />
+
+        <ListView
+            android:id="@+id/placeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="135dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/placeAddBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:contentDescription="会議場所追加ボタン"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/colorPrimary" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

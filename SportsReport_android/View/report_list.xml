@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--レポートリストアイテムのレイアウト-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/injuredPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="負傷者"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:id="@+id/smallDateAndTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/injuredPerson"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-20dp"
+        android:text="日時"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/diagnosisName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/injuredPerson"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-24dp"
+        android:layout_toRightOf="@+id/smallDateAndTimes"
+        android:text="診断名" />
+
+    <TextView
+        android:id="@+id/reporterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@id/injuredPerson"
+        android:text="報告者：" />
+
+    <TextView
+        android:id="@+id/previewOrEditButton"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="#54009688"
+        android:text="閲覧"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>
