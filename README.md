@@ -2,37 +2,43 @@
 
 ## 名前：髙見元基
 
-### 言語
+### Psyなび for 文化祭&お祭り
 ```
-HTML5/CSS3
-JavaScript(Vue.js)
-Swift
-Kotlin
+iOS・Androidアプリ
 ```
 
-### 利用サービス
+### Psyなび Studio
 ```
-Firebase
-Netlify
-```
-
-### 環境
-```
-Mac
+Webアプリ
 ```
 
-### ツール
+### 成蹊大学柔道部ホームページ
 ```
-Xcode
-Android Studio
-Atom
-ターミナル
+Webアプリ
+```
+
+### Psyなび C-mate
+```
+iOSアプリ
+```
+
+### Psyなび E-mate
+```
+iOSアプリ
+```
+
+### 「直感的」議事録
+```
+iOS・Androidアプリ
+```
+
+### スポーツ外傷レポート
+```
+iOS・Androidアプリ
 ```
 
 ### ポートフォリオ
-```
 [こちら](https://genki-takami-portfolio.netlify.app).
-```
 
 ### 開発者
 髙見元基 [Twitter](https://twitter.com/Gustave_Holmes).
