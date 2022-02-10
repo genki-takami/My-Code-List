@@ -59,4 +59,12 @@ final class DataProcessing {
     static func setUserData(_ value: String, _ key: String) {
         UserDefaults.standard.setValue(value, forKey: key)
     }
+    
+    static func getPersonalData(_ key: String) -> Bool {
+        return UserDefaults.standard.bool(forKey: key)
+    }
+    
+    static func setPersonalData(_ value: Bool, _ key: String) {
+        UserDefaults.standard.setValue(value, forKey: key)
+    }
 }

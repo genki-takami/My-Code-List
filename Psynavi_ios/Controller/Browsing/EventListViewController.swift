@@ -4,64 +4,40 @@
 
 import UIKit
 
-final class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class EventListViewController: UIViewController {
     
-    // 変数
-    var dataArray: [[String : Any]] = []
-    @IBOutlet weak var eventsTable: UITableView!
+    // MARK: - Property
+    var events = [[String : Any]]()
+    @IBOutlet private weak var eventsTable: UITableView!
     
-    // 読み込み
+    // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // デリゲート・データソース
         eventsTable.delegate = self
         eventsTable.dataSource = self
         eventsTable.tableFooterView = UIView()
     }
     
-    // 表示後処理
+    // MARK: - VIEWDIDAPPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         eventsTable.reloadData()
     }
     
-    // セルの数を返す
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
-    }
-    
-    // セルの中身を返す
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルの高さを返す
-        tableView.rowHeight = 67
-        
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "readingEventsCell", for: indexPath)
-        
-        let name = cell.viewWithTag(1) as! UILabel
-        name.text = dataArray[indexPath.row]["eventTitle"] as? String
-        let date = cell.viewWithTag(2) as! UILabel
-        date.text = dataArray[indexPath.row]["eventDate"] as? String
-        
-        return cell
-    }
-    
-    // セルが選択された時の処理
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "eventDetailsCellSegue", sender: nil)
-    }
-    
-    // 画面遷移する時にデータを渡す
+    // MARK: - PREPARE FOR SEGUE
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "eventDetailsCellSegue"{
-            let readingEventsContentViewController:EventViewController = segue.destination as! EventViewController
+        
+        if segue.identifier == "eventDetailsCellSegue" {
+            let eventVC = segue.destination as! EventViewController
             let indexPath = self.eventsTable.indexPathForSelectedRow
-            readingEventsContentViewController.uuid = dataArray[indexPath!.row]["id"] as? String
-            readingEventsContentViewController.eventTitle = dataArray[indexPath!.row]["eventTitle"] as? String
-            readingEventsContentViewController.eventDate = dataArray[indexPath!.row]["eventDate"] as? String
-            readingEventsContentViewController.caption = dataArray[indexPath!.row]["caption"] as? String
-            readingEventsContentViewController.imageCaptions = dataArray[indexPath!.row]["imageCaptions"] as? [String]
-            readingEventsContentViewController.video = dataArray[indexPath!.row]["video"] as? Bool
+            eventVC.uuid = events[indexPath!.row]["id"] as? String
+            eventVC.eventTitle = events[indexPath!.row]["eventTitle"] as? String
+            eventVC.eventDate = events[indexPath!.row]["eventDate"] as? String
+            eventVC.caption = events[indexPath!.row]["caption"] as? String
+            eventVC.imageCaptions = events[indexPath!.row]["imageCaptions"] as? [String]
+            eventVC.video = events[indexPath!.row]["video"] as? Bool
         }
     }
 }

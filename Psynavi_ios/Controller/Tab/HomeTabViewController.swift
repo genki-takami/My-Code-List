@@ -50,7 +50,7 @@ final class HomeTabViewController: UIViewController {
     }
     
     // 検索前に戻す
-    @IBAction func refreshHome(_ sender: Any) {
+    @IBAction private func refreshHome(_ sender: Any) {
         filteringDataArray = []
         noneFlag = false
         festivalList.reloadData()

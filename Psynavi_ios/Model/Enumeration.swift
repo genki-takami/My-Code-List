@@ -42,4 +42,5 @@ enum EditMode {
 
 enum PostMode {
     case inquiry
+    case comment
 }

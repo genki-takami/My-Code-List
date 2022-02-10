@@ -23,7 +23,7 @@ final class InquiryViewController: UIViewController {
     }
     
     // MARK: - 送信
-    @IBAction func sendContents(_ sender: Any) {
+    @IBAction private func sendContents(_ sender: Any) {
         
         if let title = contentsTitle.text, let content = contents.text {
             

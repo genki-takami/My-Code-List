@@ -3,129 +3,85 @@
  */
 
 import UIKit
-import Firebase
-import FirebaseUI
-import SVProgressHUD
-import AVKit
+import FirebaseStorage
 
-final class EventViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class EventViewController: UIViewController {
     
-    // 変数
+    // MARK: - Property
     @IBOutlet weak var eventCollection: UICollectionView!
-    @IBOutlet weak var eventTitleLabel: UILabel!
-    @IBOutlet weak var eventDateLabel: UILabel!
-    @IBOutlet weak var eventCaptionTextView: UITextView!
-    var uuid, eventTitle, eventDate, caption, selectedCaption: String!
+    @IBOutlet private weak var eventTitleLabel: UILabel!
+    @IBOutlet private weak var eventDateLabel: UILabel!
+    @IBOutlet private weak var eventCaptionTextView: UITextView!
+    var uuid, eventTitle, eventDate: String!
+    var caption: String!
     var imageCaptions: [String]!
-    var refArray: [StorageReference] = []
-    var selectedImage: UIImage!
     var video: Bool!
+    var refArray = [StorageReference]()
+    var selectedCaption: String!
+    var selectedImage: UIImage!
     
-    // 読み込み
+    // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // デリゲート・データソース
         eventCollection.delegate = self
         eventCollection.dataSource = self
+        
+        setUpEventData()
+    }
+    
+    // MARK: - SET-UP
+    private func setUpEventData() {
         // テキストデータ
         eventTitleLabel.text = eventTitle
         eventDateLabel.text = eventDate
         eventCaptionTextView.text = caption
         // Storageにある画像データのパスをrefArrayに加える
-        if !imageCaptions.isEmpty{
-            for i in imageCaptions{
-                self.refArray.append(Storage.storage().reference().child(self.uuid).child(PathName.EventImagePath).child(self.eventTitle).child(i.prefix(10) + ".jpg"))
+        if imageCaptions.count > 0 {
+            for cap in imageCaptions {
+                let ref = FetchData.getPath4StorageReference(uuid, PathName.EventImagePath, eventTitle, cap.prefix(10) + ".jpg")
+                refArray.append(ref)
             }
         }
     }
     
-    // セルの数
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return refArray.count
-    }
-    
-    // セルの中身
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let imageCell:UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "readingCollectionCell", for: indexPath)
+    // MARK: - PREPARE FOR SEGUE
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let imageView = imageCell.contentView.viewWithTag(1) as! UIImageView
-        // 画像データ
-        imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: refArray[indexPath.row])
-        
-        // セルのタップ検知
-        let tapGesture = MyTapGestureRecognizer(target:self, action:#selector(goToDetail(sender:)))
-        tapGesture.indexValue = indexPath
-        imageCell.addGestureRecognizer(tapGesture)
-        
-        return imageCell
-    }
-    
-    // セルをタップした時に実行
-    @objc func goToDetail(sender: MyTapGestureRecognizer){
-        collectionView(self.eventCollection, didSelectItemAt: sender.indexValue!)
-    }
-    
-    // セルが選択された時の処理
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // セル画像とキャプションを持って画面遷移
-        let cell = collectionView.cellForItem(at: indexPath)
-        let cellImageView = cell?.contentView.viewWithTag(1) as! UIImageView
-        selectedImage = cellImageView.image
-        selectedCaption = self.imageCaptions[indexPath.row]
-        if selectedImage != nil || selectedCaption != nil{
-            performSegue(withIdentifier: "toReadingImageShowSegue",sender: nil)
-        }
-    }
-    
-    // 画面遷移する時にデータを渡す
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "toReadingImageShowSegue" {
-            let readingEventImageShowViewController:EventImageViewController = segue.destination as! EventImageViewController
-            readingEventImageShowViewController.selectedImage = selectedImage
-            readingEventImageShowViewController.selectedCaption = selectedCaption
+            let eventImageVC = segue.destination as! EventImageViewController
+            eventImageVC.selectedImage = selectedImage
+            eventImageVC.selectedCaption = selectedCaption
         }
     }
     
-    // セルのサイズを返す
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // １行３セル
-        let cellSize:CGFloat = self.view.frame.width / 3
-        // 正方形で返す
-        return CGSize(width: cellSize, height: cellSize)
-    }
-    
-    // 再生準備
-    @IBAction func playVideo(_ sender: Any) {
-        // クラウドストレージから参照
-        if self.video{
-            // アップロード済み
+    // MARK: - PLAY VIDEO
+    @IBAction private func playVideo(_ sender: Any) {
+        
+        if video {
+            // 動画は投稿済み
             let fileName = self.eventTitle + ".mp4"
-            let videoRef = Storage.storage().reference().child(self.uuid).child("event-video").child(fileName)
-            videoRef.downloadURL { u, err in
-                if let _ = err{
-                    SVProgressHUD.showError(withStatus: "エラーが発生しました")
-                } else {
-                    self.playing(u! as NSURL)
-                    SVProgressHUD.show(withStatus: "ストリーミング中")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                        SVProgressHUD.dismiss()
-                    }
+            let videoRef = FetchData.getPath3StorageReference(uuid, PathName.EventVideoPath, fileName)
+
+            FetchData.downloadVideo(videoRef) { result in
+                switch result {
+                case .success(let url):
+                    self.playing(url!)
+                    self.popAlert()
+                case .failure(let error):
+                    DisplayPop.error(error.localizedDescription)
                 }
             }
         } else {
-            SVProgressHUD.showInfo(withStatus: "動画は投稿されていません")
+            DisplayPop.error("動画は投稿されていません")
         }
     }
     
-    // 動画を再生
-    func playing(_ url: NSURL){
-        let player = AVPlayer(url: url as URL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        self.present(playerViewController, animated: true) {
-            playerViewController.player!.play()
+    // ストリーミング中であることを知らせる
+    private func popAlert() {
+        DisplayPop.showMessage("ストリーミング中")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DisplayPop.dismiss()
         }
     }
 }

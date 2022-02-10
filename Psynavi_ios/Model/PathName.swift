@@ -20,6 +20,8 @@ struct PathName {
     // Storage File & Folder Path
     static let ContentImagePath = "content-image"
     static let EventImagePath = "event-image"
+    static let ContentVideoPath = "content-video"
+    static let EventVideoPath = "event-video"
     static let FestivalBackgroundImagePath = "festival-background-image.jpg"
     static let FestivalIconImagePath = "festival-icon"
 }

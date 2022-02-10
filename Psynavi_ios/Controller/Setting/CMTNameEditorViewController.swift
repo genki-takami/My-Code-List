@@ -30,7 +30,7 @@ final class CMTNameEditViewController: UIViewController {
     }
     
     // MARK: - コメントネームを変更する
-    @IBAction func changeCommentName(_ sender: Any) {
+    @IBAction private func changeCommentName(_ sender: Any) {
         
         if let name = newCommentName.text {
             

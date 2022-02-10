@@ -9,7 +9,7 @@ final class NoticeTabViewController: UIViewController {
 
     // MARK: - Property
     @IBOutlet weak var noticeList: UITableView!
-    var notices: [NoticeParam] = []
+    var notices = [NoticeParam]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {

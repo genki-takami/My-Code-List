@@ -3,30 +3,55 @@
  */
 
 import UIKit
-import Firebase
 import FirebaseUI
-import SVProgressHUD
 import AVKit
 
 final class DisplayViewController: UIViewController {
     
-    // 変数
-    @IBOutlet weak var displayTitle: UILabel!
-    @IBOutlet weak var displayTag: UILabel!
-    @IBOutlet weak var displayManager: UILabel!
-    @IBOutlet weak var displayDate: UILabel!
-    @IBOutlet weak var displayPlace: UILabel!
-    @IBOutlet weak var displayInfo: UITextView!
-    @IBOutlet weak var displayManagerInfo: UITextView!
-    @IBOutlet weak var displayImage: UIImageView!
-    var uuid, name, date, place, manager, managerInfo, tag, info: String!
+    // MARK: - Property
+    @IBOutlet private weak var displayTitle: UILabel!
+    @IBOutlet private weak var displayTag: UILabel!
+    @IBOutlet private weak var displayManager: UILabel!
+    @IBOutlet private weak var displayDate: UILabel!
+    @IBOutlet private weak var displayPlace: UILabel!
+    @IBOutlet private weak var displayInfo: UITextView!
+    @IBOutlet private weak var displayManagerInfo: UITextView!
+    @IBOutlet private weak var displayImage: UIImageView!
+    var uuid, name, date, place: String!
+    var manager, managerInfo, tag, info: String!
     var video: Bool!
-    let ref = Storage.storage().reference()
     
-    // 読み込み
+    // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpDisplayData()
+    }
+    
+    // MARK: - 再生準備
+    @IBAction private func playVideo(_ sender: Any) {
+        
+        if video {
+            // 動画は投稿されている
+            let fileName = name + ".mp4"
+            let videoRef = FetchData.getPath3StorageReference(uuid, PathName.ContentVideoPath, fileName)
+            
+            FetchData.downloadVideo(videoRef) { result in
+                switch result {
+                case .success(let url):
+                    self.playing(url!)
+                    self.popAlert()
+                case .failure(let error):
+                    DisplayPop.error(error.localizedDescription)
+                }
+            }
+        } else {
+            DisplayPop.error("動画は投稿されていません")
+        }
+    }
+    
+    // MARK: - SET-UP
+    private func setUpDisplayData() {
         // テキストデータ
         displayTitle.text = name
         displayTag.text = "タグ：\(String(tag))"
@@ -37,38 +62,25 @@ final class DisplayViewController: UIViewController {
         displayManagerInfo.text = managerInfo
         // 画像データ
         displayImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        displayImage.sd_setImage(with: ref.child(self.uuid).child(PathName.ContentImagePath).child("\(String(self.name)).jpg"))
+        let ref = FetchData.getPath3StorageReference(uuid, PathName.ContentImagePath, "\(String(self.name)).jpg")
+        displayImage.sd_setImage(with: ref)
     }
     
-    // 再生準備
-    @IBAction func playVideo(_ sender: Any) {
-        // クラウドストレージから参照
-        if self.video{
-            // アップロード済み
-            let fileName = name + ".mp4"
-            let videoRef = self.ref.child(self.uuid).child("content-video").child(fileName)
-            videoRef.downloadURL { u, err in
-                if let _ = err{
-                    SVProgressHUD.showError(withStatus: "エラーが発生しました")
-                } else {
-                    self.playing(u! as NSURL)
-                    SVProgressHUD.show(withStatus: "ストリーミング中")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                        SVProgressHUD.dismiss()
-                    }
-                }
-            }
-        } else {
-            SVProgressHUD.showInfo(withStatus: "動画は投稿されていません")
+    // ストリーミング中であることを知らせる
+    private func popAlert() {
+        DisplayPop.showMessage("ストリーミング中")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DisplayPop.dismiss()
         }
     }
     
     // 動画を再生
-    func playing(_ url: NSURL){
-        let player = AVPlayer(url: url as URL)
+    private func playing(_ url: URL) {
+        
         let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        self.present(playerViewController, animated: true) {
+        playerViewController.player = AVPlayer(url: url)
+        
+        present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
     }

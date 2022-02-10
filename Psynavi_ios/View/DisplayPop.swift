@@ -24,6 +24,11 @@ final class DisplayPop {
         SVProgressHUD.show()
     }
     
+    static func showMessage(_ message: String) {
+        if initializing == false { setting() }
+        SVProgressHUD.show(withStatus: message)
+    }
+    
     static func dismiss() {
         if initializing == false { setting() }
         SVProgressHUD.dismiss()

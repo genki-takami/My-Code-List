@@ -7,8 +7,8 @@ import UIKit
 final class EventImageViewController: UIViewController {
 
     // 変数
-    @IBOutlet weak var readingBigImage: UIImageView!
-    @IBOutlet weak var readingCaption: UILabel!
+    @IBOutlet private weak var readingBigImage: UIImageView!
+    @IBOutlet private weak var readingCaption: UILabel!
     var selectedImage: UIImage!
     var selectedCaption: String!
     
@@ -18,7 +18,7 @@ final class EventImageViewController: UIViewController {
 
         // 画像データ
         readingBigImage.image = selectedImage
-        // テキストデータ
+        // テキストデータ(最初の10行はIDのため切り取る)
         readingCaption.text = String(selectedCaption.dropFirst(10)) as String
     }
 }

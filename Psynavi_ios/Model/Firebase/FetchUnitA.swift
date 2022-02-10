@@ -45,7 +45,8 @@ final class FetchData {
                 handler(.failure(FirebaseError.fetchError))
             } else {
                 if document!.exists {
-                    guard let data = document!.data() else { fatalError() }
+                    guard var data = document!.data() else { fatalError() }
+                    data["documentID"] = document!.documentID
                     handler(.success(data))
                 } else {
                     handler(.failure(FirebaseError.fetchError))
