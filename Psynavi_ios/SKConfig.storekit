@@ -1,0 +1,34 @@
+{
+  "identifier" : "BED496BD",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "93EBC37A",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "psynavi.vote.option",
+      "referenceName" : "Vote Option",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_locale" : "ja",
+    "_storefront" : "JPN"
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

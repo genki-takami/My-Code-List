@@ -4,15 +4,16 @@
 
 import UIKit
 
-class PresentationController: UIPresentationController {
+final class PresentationController: UIPresentationController {
     
     // 呼び出し元のViewControllerの上に重ねるオーバレイView
     var overlayView = UIView()
 
     // 表示トランジション開始前に呼ばれる
     override func presentationTransitionWillBegin() {
-        guard let containerView = containerView else { return }
-        
+        guard let containerView = containerView else {
+            return
+        }
         overlayView.frame = containerView.bounds
         overlayView.gestureRecognizers = [UITapGestureRecognizer(target: self, action: #selector(PresentationController.overlayViewDidTouch(_:)))]
         overlayView.backgroundColor = .black
@@ -40,7 +41,6 @@ class PresentationController: UIPresentationController {
     }
 
     let margin = (x: CGFloat(40), y: CGFloat(220.0))
-    
     // 子のコンテナサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)

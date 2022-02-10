@@ -3,181 +3,144 @@
  */
 
 import UIKit
-import RealmSwift
-import SVProgressHUD
-import Accounts
 
-class InputViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+final class InputViewController: UIViewController {
 
-    // 変数
-    @IBOutlet weak var injured: UITextField!
-    @IBOutlet weak var reporter: UITextField!
-    @IBOutlet weak var date: UIDatePicker!
-    @IBOutlet weak var spot: UITextField!
-    @IBOutlet weak var part: UITextField!
-    @IBOutlet weak var diagnosis: UITextField!
-    @IBOutlet weak var cause: UITextField!
-    @IBOutlet weak var aftereffect: UITextField!
+    // MARK: - Property
+    @IBOutlet private weak var injured: UITextField!
+    @IBOutlet private weak var reporter: UITextField!
+    @IBOutlet private weak var date: UIDatePicker!
+    @IBOutlet private weak var spot: UITextField!
+    @IBOutlet private weak var part: UITextField!
+    @IBOutlet private weak var diagnosis: UITextField!
+    @IBOutlet private weak var cause: UITextField!
+    @IBOutlet private weak var aftereffect: UITextField!
     @IBOutlet weak var picture: UIImageView!
-    var reportData: Database!
-    let realm = try! Realm()
-    var didSaving = false
+    private var isSaved = false
+    var report: Report!
     
-    // 読み込み
+    // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        injured.text = reportData.injured
-        reporter.text = reportData.reporter
-        date.date = reportData.date
-        spot.text = reportData.spot
-        part.text = reportData.part
-        diagnosis.text = reportData.diagnosis
-        cause.text = reportData.cause
-        aftereffect.text = reportData.aftereffect
-        NSData(data: reportData.image).count != 0 ? (picture.image = UIImage(data: reportData.image)) : (picture.image = UIImage(systemName: "questionmark.square.dashed"))
-        
-        // 背景をタップしたらキーボードを閉じる
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard)))
+        setUpData()
+        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        view.addGestureRecognizer(gesture)
     }
     
-    // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    // カメラを起動して画像を撮影する
-    @IBAction func setImageByCamera(_ sender: Any) {
-        // カメラを指定してピッカーを開く
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let pickerController = UIImagePickerController()
-            pickerController.delegate = self
-            pickerController.sourceType = .camera
-            self.present(pickerController, animated: true, completion: nil)
+    // MARK: - SETUPDATA
+    private func setUpData() {
+        injured.text = report.injured
+        reporter.text = report.reporter
+        date.date = report.date
+        spot.text = report.spot
+        part.text = report.part
+        diagnosis.text = report.diagnosis
+        cause.text = report.cause
+        aftereffect.text = report.aftereffect
+        // 画像が未設定だったらクエスチョンマークにする
+        if NSData(data: report.image).count != 0 {
+            picture.image = UIImage(data: report.image)
+        } else {
+            picture.image = UIImage(systemName: "questionmark.square.dashed")
         }
     }
     
-    // ライブラリを起動して画像を選択する
-    @IBAction func setImageFromLibrary(_ sender: Any) {
-        // ライブラリを指定してピッカーを開く
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let pickerController = UIImagePickerController()
-            pickerController.delegate = self
-            pickerController.sourceType = .photoLibrary
-            self.present(pickerController, animated: true, completion: nil)
-        }
+    // MARK: - CAMERA
+    @IBAction private func setImageByCamera(_ sender: Any) {
+        pickingStart(.camera)
     }
     
-    // 写真を撮影・選択したときに呼ばれるメソッド
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let info = info[.originalImage]{
-            // 撮影・選択された画像を取得する
-            self.picture.image = info as? UIImage
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    // ピッカーのキャンセルボタンが押された時の処理
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
+    // MARK: - PHOTO
+    @IBAction private func setImageFromLibrary(_ sender: Any) {
+        pickingStart(.photoLibrary)
     }
     
-    // 保存
-    @IBAction func save(_ sender: Any) {
-        if let injured = self.injured.text, let reporter = self.reporter.text{
-            
-            if injured.isEmpty || reporter.isEmpty{
-                SVProgressHUD.showError(withStatus: "負傷者と報告者を記入してください")
-                return
-            }
-            
-            SVProgressHUD.show()
-            
-            do {
-                try realm.write{
-                    self.reportData.injured = injured
-                    self.reportData.reporter = reporter
-                    self.reportData.date = date.date
-                    self.reportData.spot = spot.text!
-                    self.reportData.part = part.text!
-                    self.reportData.diagnosis = diagnosis.text!
-                    self.reportData.cause = cause.text!
-                    self.reportData.aftereffect = aftereffect.text!
-                    if let data = picture.image?.jpegData(compressionQuality: 0.75), NSData(data: data).count != 0{
-                        self.reportData.image = data
-                    }
-                    self.realm.add(self.reportData, update: .modified)
-                }
-                self.didSaving = true
-                SVProgressHUD.showSuccess(withStatus: "保存作業が完了！")
-            } catch _ as NSError {
-                SVProgressHUD.showError(withStatus: "保存に失敗！")
-                self.didSaving = false
+    // MARK: - SAVE
+    @IBAction private func save(_ sender: Any) {
+        guard let injured = injured.text, let reporter = reporter.text else { return }
+        
+        if injured.isEmpty || reporter.isEmpty {
+            DisplayPop.error("負傷者と報告者を記入してください")
+            return
+        }
+        
+        DisplayPop.show()
+        
+        let draft: [String : Any] = [
+            "injured": injured,
+            "reporter": reporter,
+            "date": date.date,
+            "spot": spot.text!,
+            "part": part.text!,
+            "diagnosis": diagnosis.text!,
+            "cause": cause.text!,
+            "aftereffect": aftereffect.text!,
+            "picture": picture.image!.jpegData(compressionQuality: 0.75)!,
+        ]
+        
+        DataProcessing.add(report, draft) { result in
+            switch result {
+            case .success(let text):
+                DisplayPop.success(text)
+                self.isSaved = true
+            case .failure(let error):
+                DisplayPop.error(error.localizedDescription)
+                self.isSaved = false
             }
         }
     }
     
-    // 共有
-    @IBAction func share(_ sender: Any) {
-        self.save(true)
-        
-        if didSaving{
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let dateString:String = formatter.string(from: self.reportData.date)
-            let p1 = "【負傷者】\n\(self.reportData.injured)\n\n"
-            let p2 = "【報告者】\n\(self.reportData.reporter)\n\n"
-            let p3 = "【発生日時】\n\(dateString)\n\n"
-            let p4 = "【場所】\n\(self.reportData.spot)\n\n"
-            let p5 = "【負傷部位】\n\(self.reportData.part)\n\n"
-            let p6 = "【医師による診断名】\n\(self.reportData.diagnosis)\n\n"
-            let p7 = "【主な原因】\n\(self.reportData.cause)\n\n"
-            let p8 = "【後遺症など】\n\(self.reportData.aftereffect)\n\n"
-            let connectedText = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8
-            
-            let shareText = connectedText
-            let activityItems = [shareText]
-            let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-            let excludedActivityTypes = [
-                UIActivity.ActivityType.postToFacebook,
-                UIActivity.ActivityType.postToTwitter,
-                UIActivity.ActivityType.message,
-                UIActivity.ActivityType.saveToCameraRoll,
-                UIActivity.ActivityType.print,
-                UIActivity.ActivityType.markupAsPDF
-            ]
-            activityVC.excludedActivityTypes = excludedActivityTypes
-            // UIActivityViewControllerを表示
-            self.present(activityVC, animated: true, completion: nil)
-        }
+    // MARK: - SHARE
+    @IBAction private func share(_ sender: Any) {
+        making(true)
     }
     
-    // PDFの作成
-    @IBAction func createPDF(_ sender: Any) {
-        self.save(true)
+    // MARK: - CREATEPDF
+    @IBAction private func createPDF(_ sender: Any) {
+        making(false)
+    }
+    
+    // データの共有
+    private func making(_ isShare: Bool) {
+        // 保存していなかったら保存する
+        if !isSaved {
+            save(true)
+        }
         
-        if didSaving{
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let dateString:String = formatter.string(from: self.reportData.date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let dateString: String = formatter.string(from: report.date)
+        
+        let p1 = "【負傷者】\n\(report.injured)\n\n"
+        let p2 = "【報告者】\n\(report.reporter)\n\n"
+        let p3 = "【発生日時】\n\(dateString)\n\n"
+        let p4 = "【場所】\n\(report.spot)\n\n"
+        let p5 = "【負傷部位】\n\(report.part)\n\n"
+        let p6 = "【医師による診断名】\n\(report.diagnosis)\n\n"
+        let p7 = "【主な原因】\n\(report.cause)\n\n"
+        let p8 = "【後遺症など】\n\(report.aftereffect)\n\n"
+        let concatenatedText = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8
+        
+        if isShare {
+            // 共有処理
+            let activityVC = ShareData.modeText(concatenatedText)
+            present(activityVC, animated: true, completion: nil)
+        } else {
+            // PDFの作成
             let p0 = "　　　　　　　　ケガに関するレポート powerd by 外傷レポートapp\n\n"
-            let p1 = "【負傷者】\n\(self.reportData.injured)\n\n"
-            let p2 = "【報告者】\n\(self.reportData.reporter)\n\n"
-            let p3 = "【発生日時】\n\(dateString)\n\n"
-            let p4 = "【場所】\n\(self.reportData.spot)\n\n"
-            let p5 = "【負傷部位】\n\(self.reportData.part)\n\n"
-            let p6 = "【医師による診断名】\n\(self.reportData.diagnosis)\n\n"
-            let p7 = "【主な原因】\n\(self.reportData.cause)\n\n"
-            let p8 = "【後遺症など】\n\(self.reportData.aftereffect)\n\n"
-            let connectedText = p0 + p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8
             
-            let pdfViewerViewController = PDFViewerViewController()
-            pdfViewerViewController.reportText = connectedText
-            if let data = picture.image{
-                pdfViewerViewController.image = data
+            let pdfVC = PDFViewController()
+            pdfVC.reportText = p0 + concatenatedText
+            if let data = picture.image {
+                pdfVC.image = data
             }
-            let navigationViewController = UINavigationController(rootViewController: pdfViewerViewController)
-            self.present(navigationViewController, animated: true, completion: nil)
+            
+            showNavigation(pdfVC)
         }
     }
 }
