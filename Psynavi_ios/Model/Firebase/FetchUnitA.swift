@@ -8,7 +8,7 @@ import Firebase
 final class FetchData {
     
     private static var listener: ListenerRegistration!
-    private static let firestore = Firestore.firestore()
+    static let firestore = Firestore.firestore()
     
     static func isListenerNil() -> Bool {
         listener == nil ? true : false

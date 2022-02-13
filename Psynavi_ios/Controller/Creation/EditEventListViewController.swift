@@ -13,7 +13,7 @@ final class EditEventListViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var eventTable: UITableView!
     var mailAdress, password: String!
     let realm = try! Realm()
-    var eventArray: [EventsDB]! = []
+    var eventArray: [Event]! = []
     
     // 読み込み
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ final class EditEventListViewController: UIViewController, UITableViewDelegate, 
         
         // データベースからオブジェクトのイベントを持ってくる
         self.eventArray.removeAll()
-        for item in realm.objects(EventsDB.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
+        for item in realm.objects(Event.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
             self.eventArray.append(item)
         }
         eventTable.reloadData()
@@ -84,7 +84,7 @@ final class EditEventListViewController: UIViewController, UITableViewDelegate, 
     }
     
     // 画面遷移する時にデータを渡す
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "eventsCellSegue":
             let eventsEditViewController:EditEventViewController = segue.destination as! EditEventViewController
@@ -92,7 +92,7 @@ final class EditEventListViewController: UIViewController, UITableViewDelegate, 
             eventsEditViewController.event = eventArray[indexPath!.row]
         case "editCSegue":
             let eventsEditViewController:EditEventViewController = segue.destination as! EditEventViewController
-            let event = EventsDB()
+            let event = Event()
             event.id = NSUUID().uuidString
             event.mailAdress = self.mailAdress
             event.password = self.password

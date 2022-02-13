@@ -4,7 +4,8 @@
 
 import RealmSwift
 
-class AnnotationDB: Object{
+final class Annotation: Object {
+    
     // 管理用 ID
     @objc dynamic var id = ""
     

@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class EventsDB: Object {
+final class Event: Object {
     
     // メールアドレス
     @objc dynamic var mailAdress = ""
@@ -12,7 +12,7 @@ class EventsDB: Object {
     // パスワード
     @objc dynamic var password = ""
     
-    // 管理用 ID。プライマリーキー
+    // 管理用 ID
     @objc dynamic var id = ""
     
     // イベント名

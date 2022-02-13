@@ -7,7 +7,7 @@ import Firebase
 
 extension FetchData {
     
-    private static let storage = Storage.storage().reference()
+    static let storage = Storage.storage().reference()
     
     static func getReference(_ path: String) -> StorageReference {
         return storage.child(path)
@@ -34,5 +34,12 @@ extension FetchData {
                 handler(.success(url))
             }
         }
+    }
+    
+    static func prepareMetadata() -> StorageMetadata {
+        let storageMetadata = StorageMetadata()
+        storageMetadata.contentType = "image/jpeg"
+        
+        return storageMetadata
     }
 }

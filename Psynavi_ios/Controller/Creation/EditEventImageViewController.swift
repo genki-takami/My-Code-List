@@ -23,7 +23,7 @@ final class EditEventImageViewController: UIViewController {
     }
     
     // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     

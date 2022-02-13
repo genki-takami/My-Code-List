@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class NoticeDB: Object {
+final class Notices: Object {
     
     // メールアドレス
     @objc dynamic var mailAdress = ""
@@ -12,7 +12,7 @@ class NoticeDB: Object {
     // パスワード
     @objc dynamic var password = ""
     
-    // 管理用 ID。プライマリーキー
+    // 管理用 ID
     @objc dynamic var id = ""
     
     // 件名

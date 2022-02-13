@@ -20,7 +20,7 @@ final class EditContentViewController: UIViewController, UIImagePickerController
     @IBOutlet weak var infoText: UITextView!
     @IBOutlet weak var managerInfo: UITextView!
     var isShop = true
-    var content: ContentsDB!
+    var content: ShopDisplay!
     let realm = try! Realm()
 
     // 読み込み
@@ -45,7 +45,7 @@ final class EditContentViewController: UIViewController, UIImagePickerController
     }
     
     // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     

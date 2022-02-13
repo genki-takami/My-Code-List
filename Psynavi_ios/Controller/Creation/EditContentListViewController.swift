@@ -13,7 +13,7 @@ final class EditContentListViewController: UIViewController, UITableViewDelegate
     @IBOutlet weak var contentsTable: UITableView!
     var mailAdress, password: String!
     let realm = try! Realm()
-    var contentsArray: [ContentsDB]! = []
+    var contentsArray: [ShopDisplay]! = []
     
     // 読み込み
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ final class EditContentListViewController: UIViewController, UITableViewDelegate
         super.viewWillAppear(animated)
         // データベースからオブジェクトのコンテンツを持ってくる
         self.contentsArray.removeAll()
-        for item in realm.objects(ContentsDB.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
+        for item in realm.objects(ShopDisplay.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
             self.contentsArray.append(item)
         }
         // tableをリロード
@@ -90,7 +90,7 @@ final class EditContentListViewController: UIViewController, UITableViewDelegate
     }
     
     // 画面遷移する時にデータを渡す
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "contentsCellSegue":
             let contentsEditViewController:EditContentViewController = segue.destination as! EditContentViewController
@@ -98,7 +98,7 @@ final class EditContentListViewController: UIViewController, UITableViewDelegate
             contentsEditViewController.content = contentsArray[indexPath!.row]
         case "editASegue":
             let contentsEditViewController:EditContentViewController = segue.destination as! EditContentViewController
-            let content = ContentsDB()
+            let content = ShopDisplay()
             content.id = NSUUID().uuidString
             content.mailAdress = self.mailAdress
             content.password = self.password

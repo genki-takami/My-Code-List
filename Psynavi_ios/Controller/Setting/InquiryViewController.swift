@@ -18,7 +18,7 @@ final class InquiryViewController: UIViewController {
         view.addGestureRecognizer(gesture)
     }
     
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     

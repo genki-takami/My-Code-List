@@ -9,7 +9,7 @@ extension VoteOptionPurchaseViewController {
     func confirmPurchase() {
         
         let message = "購入後は必ず保存して下さい\nすでにコンテンツを公開している場合は、再度公開してアップデートして下さい"
-        let alertController: UIAlertController = UIAlertController(title: "重要", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "重要", message: message, preferredStyle: .alert)
         let actionYes = UIAlertAction(title: "購入する", style: .default) { action in
             StoreManager.shared.purchaseProduct("psynavi.vote.option", self.uuid)
             self.dismiss(animated: true, completion: nil)

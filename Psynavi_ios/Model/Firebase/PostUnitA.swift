@@ -7,8 +7,8 @@ import Firebase
 
 final class PostData {
     
-    private static let firestore = Firestore.firestore()
-    private static let database = Database.database().reference()
+    static let firestore = FetchData.firestore
+    private static let database = FetchData.database
     
     static func postDocument<T>(_ data: T, _ col: String, _ doc: String, _ mode: PostMode, handler: @escaping ResultHandler<String>) {
         

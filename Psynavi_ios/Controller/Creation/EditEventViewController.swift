@@ -17,7 +17,7 @@ final class EditEventViewController: UIViewController, UIImagePickerControllerDe
     var selectedImage: UIImage!
     var selectedCaption: String!
     let realm = try! Realm()
-    var event: EventsDB!
+    var event: Event!
 
     // 読み込み
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ final class EditEventViewController: UIViewController, UIImagePickerControllerDe
     }
     
     // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -51,7 +51,7 @@ final class EditEventViewController: UIViewController, UIImagePickerControllerDe
         let indexPath = self.imageCollection.indexPathForItem(at: point)
         if let indexPath = indexPath {
             let message = "ロングタップした画像とそのキャプションを削除しますか？"
-            let alertController: UIAlertController = UIAlertController(title: "画像を削除", message: message, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "画像を削除", message: message, preferredStyle: .alert)
             let actionYes = UIAlertAction(title: "削除", style: .default){ action in
                 // 削除する
                 self.event.images.remove(at: indexPath.row)
@@ -189,7 +189,7 @@ final class EditEventViewController: UIViewController, UIImagePickerControllerDe
     }
     
     // 画面遷移する時にデータを渡す
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toImageShowCell" {
             let eventImageShowViewController:EditEventImagePreviewController = segue.destination as! EditEventImagePreviewController
             eventImageShowViewController.selectedImage = selectedImage

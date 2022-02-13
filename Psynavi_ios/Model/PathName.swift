@@ -23,5 +23,5 @@ struct PathName {
     static let ContentVideoPath = "content-video"
     static let EventVideoPath = "event-video"
     static let FestivalBackgroundImagePath = "festival-background-image.jpg"
-    static let FestivalIconImagePath = "festival-icon"
+    static let FestivalIconImagePath = "festival-icon.jpg"
 }

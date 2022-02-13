@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class ContentsDB: Object {
+final class ShopDisplay: Object {
     
     // メールアドレス
     @objc dynamic var mailAdress = ""
@@ -12,7 +12,7 @@ class ContentsDB: Object {
     // パスワード
     @objc dynamic var password = ""
     
-    // 管理用 ID。プライマリーキー
+    // 管理用 ID
     @objc dynamic var id = ""
     
     // 店か展示か

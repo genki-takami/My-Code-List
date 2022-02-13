@@ -13,6 +13,14 @@ final class DataProcessing {
         switch model {
         case .favorite:
             return realm.objects(Favorite.self)
+        case .content:
+            return realm.objects(ShopDisplay.self)
+        case .event:
+            return realm.objects(Event.self)
+        case .notice:
+            return realm.objects(Notices.self)
+        case .map:
+            return realm.objects(Map.self)
         }
     }
 
@@ -24,6 +32,8 @@ final class DataProcessing {
                     switch model {
                     case .favorite:
                         realm.add(object as! Favorite, update: .modified)
+                    case .map:
+                        realm.add(object as! Map, update: .modified)
                     }
                 }
             }
@@ -32,6 +42,8 @@ final class DataProcessing {
             switch model {
             case .favorite:
                 handler(.failure(RealmError.register))
+            case .map:
+                //
             }
         }
     }
@@ -41,13 +53,20 @@ final class DataProcessing {
             try realm.write {
                 switch model {
                 case .favorite: realm.delete(object as! Favorite)
+                case .content: realm.delete(object as! ShopDisplay)
+                case .event: realm.delete(object as! Event)
+                case .notice: realm.delete(object as! Notices)
+                case .map: realm.delete(object as! Map)
                 }
             }
             handler(.success("削除しました"))
         } catch _ {
             switch model {
-            case .favorite:
-                handler(.failure(RealmError.disregister))
+            case .favorite: handler(.failure(RealmError.disregister))
+            case .content: handler(.failure(RealmError.deleteError))
+            case .event: handler(.failure(RealmError.deleteError))
+            case .notice: handler(.failure(RealmError.deleteError))
+            case .map: handler(.failure(RealmError.deleteError))
             }
         }
     }
@@ -65,6 +84,14 @@ final class DataProcessing {
     }
     
     static func setPersonalData(_ value: Bool, _ key: String) {
+        UserDefaults.standard.setValue(value, forKey: key)
+    }
+    
+    static func getAccountData(_ key: String) -> [String]? {
+        return UserDefaults.standard.stringArray(forKey: key)
+    }
+    
+    static func setAccountData(_ value: [String], _ key: String) {
         UserDefaults.standard.setValue(value, forKey: key)
     }
 }

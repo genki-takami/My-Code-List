@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class SaveData: Object{
+final class PsyData: Object {
     
     // メールアドレス
     @objc dynamic var mailAdress = ""

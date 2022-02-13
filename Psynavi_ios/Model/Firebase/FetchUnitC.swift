@@ -7,7 +7,7 @@ import Firebase
 
 extension FetchData {
     
-    private static let database = Database.database().reference()
+    static let database = Database.database().reference()
     
     static func fetchDatabase(_ path: String, handler: @escaping ResultHandler<[String:AnyObject]>) {
         

@@ -12,7 +12,7 @@ extension MainViewController {
     func sendAlert(_ text: String, _ name: String) {
         
         let message = "内容：\(text.prefix(10))・・・"
-        let alertController: UIAlertController = UIAlertController(title: "送信しますか？", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "送信しますか？", message: message, preferredStyle: .alert)
         let actionYes = UIAlertAction(title: "はい、送信", style: .default) { action in
             
             DisplayPop.show()

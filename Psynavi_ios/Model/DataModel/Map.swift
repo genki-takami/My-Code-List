@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class MapDB: Object {
+final class Map: Object {
     
     // メールアドレス
     @objc dynamic var mailAdress = ""
@@ -22,7 +22,7 @@ class MapDB: Object {
     @objc dynamic var longitude = 139.767125
     
     // ピンのリスト
-    let annotations = List<AnnotationDB>()
+    let annotations = List<Annotation>()
         
     // id をプライマリーキーとして設定
     override static func primaryKey() -> String? {

@@ -4,7 +4,7 @@
 
 import RealmSwift
 
-class Favorite: Object{
+final class Favorite: Object {
     
     // uuid
     @objc dynamic var id = ""

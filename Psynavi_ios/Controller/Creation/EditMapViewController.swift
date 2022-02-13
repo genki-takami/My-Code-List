@@ -21,7 +21,7 @@ final class EditMapViewController: UIViewController, CLLocationManagerDelegate, 
     var uuid, mailAdress, password: String!
     var pinList: [(String,String,String,Double,Double)] = []
     let realm = try! Realm()
-    var festivalData: MapDB!
+    var festivalData: Map!
     var downloadLat, downloadLon: Double!
     var downloadableMarkers: Int!
     var locationManager: CLLocationManager!
@@ -52,7 +52,7 @@ final class EditMapViewController: UIViewController, CLLocationManagerDelegate, 
         } else {
             // 新規作成
             mapView.region = self.region// 初期値は東京駅の位置情報をセット
-            festivalData = MapDB()
+            festivalData = Map()
             festivalData.id = NSUUID().uuidString
             festivalData.mailAdress = self.mailAdress
             festivalData.password = self.password
@@ -62,7 +62,7 @@ final class EditMapViewController: UIViewController, CLLocationManagerDelegate, 
     }
     
     // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -263,7 +263,7 @@ final class EditMapViewController: UIViewController, CLLocationManagerDelegate, 
                 self.festivalData.longitude = self.doubleLon
                 self.festivalData.annotations.removeAll()
                 for i in pinList{
-                    let myAnnotation = AnnotationDB()
+                    let myAnnotation = Annotation()
                     myAnnotation.id = NSUUID().uuidString
                     myAnnotation.title = i.0
                     myAnnotation.subtitle = i.1

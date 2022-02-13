@@ -13,7 +13,7 @@ final class EditNoticeListViewController: UIViewController, UITableViewDelegate,
     @IBOutlet weak var noticeTable: UITableView!
     var mailAdress, password: String!
     let realm = try! Realm()
-    var noticeArray: [NoticeDB]! = []
+    var noticeArray: [Notices]! = []
     
     // 読み込み
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ final class EditNoticeListViewController: UIViewController, UITableViewDelegate,
         super.viewWillAppear(animated)
         // データベースからオブジェクトのお知らせを持ってくる
         self.noticeArray.removeAll()
-        for item in realm.objects(NoticeDB.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
+        for item in realm.objects(Notices.self).filter("mailAdress == '\(String(self.mailAdress))' AND password == '\(String(self.password))'") {
             self.noticeArray.append(item)
         }
         // tableをリロード
@@ -91,7 +91,7 @@ final class EditNoticeListViewController: UIViewController, UITableViewDelegate,
     }
     
     // 画面遷移する時にデータを渡す
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "noticeCellSegue":
             let noticeEditViewController:EditNoticeViewController = segue.destination as! EditNoticeViewController
@@ -99,7 +99,7 @@ final class EditNoticeListViewController: UIViewController, UITableViewDelegate,
             noticeEditViewController.notice = noticeArray[indexPath!.row]
         case "editBSegue":
             let noticeEditViewController:EditNoticeViewController = segue.destination as! EditNoticeViewController
-            let notice = NoticeDB()
+            let notice = Notices()
             notice.id = NSUUID().uuidString
             notice.mailAdress = self.mailAdress
             notice.password = self.password

@@ -13,7 +13,7 @@ final class EditNoticeViewController: UIViewController {
     @IBOutlet weak var noticeTitle: UITextField!
     @IBOutlet weak var noticeContent: UITextView!
     let realm = try! Realm()
-    var notice: NoticeDB!
+    var notice: Notices!
 
     // 読み込み
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ final class EditNoticeViewController: UIViewController {
     }
     
     // キーボードを閉じる
-    @objc func dismissKeyboard(){
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     

@@ -10,7 +10,7 @@ extension VoteOperationViewController {
     func voteFor(_ title: String) {
         
         let message = "１度投票したら、再度投票できません\n(ひとり１票)"
-        let alertController: UIAlertController = UIAlertController(title: "投票しますか？", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "投票しますか？", message: message, preferredStyle: .alert)
         let actionYes = UIAlertAction(title: "投票", style: .default) { action in
             
             DisplayPop.show()
