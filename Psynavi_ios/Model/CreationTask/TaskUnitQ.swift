@@ -27,12 +27,10 @@ extension EditMainViewController {
                 
                 PostData.imageUpload(imgRef, path, content.image, storageMetadata) { result in
                     switch result {
-                    case .success(let success):
-                        if success {
-                            taskCounter -= 1
-                            if taskCounter == 0 {
-                                self.stepBar()// 70%
-                            }
+                    case .success(_):
+                        taskCounter -= 1
+                        if taskCounter == 0 {
+                            self.stepBar()// 70%
                         }
                     case .failure(let error):
                         DisplayPop.error(error.localizedDescription)
@@ -70,12 +68,10 @@ extension EditMainViewController {
                         
                         PostData.imageUpload(imgRef, path, image, storageMetadata) { result in
                             switch result {
-                            case .success(let success):
-                                if success {
-                                    imageTaskCounter -= 1
-                                    if taskCounter == 0 && imageTaskCounter == 0 {
-                                        self.stepBar()// 90%
-                                    }
+                            case .success(_):
+                                imageTaskCounter -= 1
+                                if taskCounter == 0 && imageTaskCounter == 0 {
+                                    self.stepBar()// 90%
                                 }
                             case .failure(let error):
                                 DisplayPop.error(error.localizedDescription)

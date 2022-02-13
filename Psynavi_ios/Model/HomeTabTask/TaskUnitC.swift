@@ -35,13 +35,11 @@ extension HomeTabViewController {
                 DataProcessing.delete(match, RealmModel.favorite) { result in
                     isNotFavorite = false
                     switch result {
-                    case .success(let text):
-                        if !text.isEmpty {
-                            // お気に入りを解除する
-                            self.updateFavorite(isNotFavorite, indexPath!.row)
-                            // 画像を空のスターに変更
-                            sender.setImage(UIImage(systemName: "star"), for: .normal)
-                        }
+                    case .success(_):
+                        // お気に入りを解除する
+                        self.updateFavorite(isNotFavorite, indexPath!.row)
+                        // 画像を空のスターに変更
+                        sender.setImage(UIImage(systemName: "star"), for: .normal)
                     case .failure(let error):
                         DisplayPop.error(error.localizedDescription)
                     }
@@ -60,13 +58,11 @@ extension HomeTabViewController {
             
             DataProcessing.add(new, [:], EditMode.add, RealmModel.favorite) { result in
                 switch result {
-                case .success(let text):
-                    if !text.isEmpty {
-                        // お気に入りにする
-                        self.updateFavorite(true, indexPath!.row)
-                        // 画像をお気に入りスターに変更
-                        sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                    }
+                case .success(_):
+                    // お気に入りにする
+                    self.updateFavorite(true, indexPath!.row)
+                    // 画像をお気に入りスターに変更
+                    sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
                 case .failure(let error):
                     DisplayPop.error(error.localizedDescription)
                 }

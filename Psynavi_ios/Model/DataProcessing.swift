@@ -32,6 +32,12 @@ final class DataProcessing {
                     switch model {
                     case .favorite:
                         realm.add(object as! Favorite, update: .modified)
+                    case .content:
+                        realm.add(object as! ShopDisplay, update: .modified)
+                    case .event:
+                        realm.add(object as! Event, update: .modified)
+                    case .notice:
+                        realm.add(object as! Notices, update: .modified)
                     case .map:
                         realm.add(object as! Map, update: .modified)
                     }
@@ -42,8 +48,8 @@ final class DataProcessing {
             switch model {
             case .favorite:
                 handler(.failure(RealmError.register))
-            case .map:
-                //
+            default:
+                handler(.failure(RealmError.saveError))
             }
         }
     }
@@ -63,10 +69,7 @@ final class DataProcessing {
         } catch _ {
             switch model {
             case .favorite: handler(.failure(RealmError.disregister))
-            case .content: handler(.failure(RealmError.deleteError))
-            case .event: handler(.failure(RealmError.deleteError))
-            case .notice: handler(.failure(RealmError.deleteError))
-            case .map: handler(.failure(RealmError.deleteError))
+            default: handler(.failure(RealmError.deleteError))
             }
         }
     }

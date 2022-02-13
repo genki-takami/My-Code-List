@@ -33,12 +33,10 @@ extension EditMainViewController {
         // バッチ処理
         PostData.batchProcessing(values, saveData, isNewObject!) { result in
             switch result {
-            case .success(let success):
-                if success {
-                    // 達成度30%
-                    self.stepBar()
-                    self.iconUpload(neededBox)
-                }
+            case .success(_):
+                // 達成度30%
+                self.stepBar()
+                self.iconUpload(neededBox)
             case .failure(let error):
                 DisplayPop.error(error.localizedDescription)
                 self.progressView.setProgress(0.0, animated: true)
@@ -60,13 +58,11 @@ extension EditMainViewController {
         // アイコン画像
         PostData.imageUpload(imgRef, PathName.FestivalIconImagePath, saveData.iconImage, storageMetadata) { result in
             switch result {
-            case .success(let success):
-                if success {
-                    self.successCount += 0.1
-                    self.progressView.setProgress(self.successCount, animated: true)// 40%
-                    // 背景画像をアップロードする
-                    self.backgroundImageUpload(imgRef, storageMetadata, neededBox)
-                }
+            case .success(_):
+                self.successCount += 0.1
+                self.progressView.setProgress(self.successCount, animated: true)// 40%
+                // 背景画像をアップロードする
+                self.backgroundImageUpload(imgRef, storageMetadata, neededBox)
             case .failure(let error):
                 DisplayPop.error(error.localizedDescription)
                 self.progressView.setProgress(0.0, animated: true)
@@ -80,14 +76,11 @@ extension EditMainViewController {
         
         PostData.imageUpload(imgRef, PathName.FestivalBackgroundImagePath, saveData.backgroundImage, storageMetadata) { result in
             switch result {
-            case .success(let success):
-                if success {
-                    self.successCount += 0.1
-                    self.progressView.setProgress(self.successCount, animated: true)// 50%
-                    
-                    // コンテンツとイベントの画像をアップロードする
-                    self.othersUpload(imgRef, neededBox)
-                }
+            case .success(_):
+                self.successCount += 0.1
+                self.progressView.setProgress(self.successCount, animated: true)// 50%
+                // コンテンツとイベントの画像をアップロードする
+                self.othersUpload(imgRef, neededBox)
             case .failure(let error):
                 DisplayPop.error(error.localizedDescription)
                 self.progressView.setProgress(0.0, animated: true)

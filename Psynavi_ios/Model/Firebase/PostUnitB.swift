@@ -7,8 +7,7 @@ import Firebase
 
 extension PostData {
     
-    private static let batch = firestore.batch()
-    private static let storage = FetchData.storage
+    static let batch = firestore.batch()
     
     private static func getDocumentReference(_ collection: String, _ uid: String) -> DocumentReference {
         return firestore.collection(collection).document(uid)
@@ -70,6 +69,25 @@ extension PostData {
             
             if let _ = error {
                 handler(.failure(FirebaseError.uploadError))
+            } else {
+                handler(.success(true))
+            }
+        }
+    }
+    
+    static func releaseUpdate(_ festivalName: String, _ uuid: String, _ mainData: [String:Any], _ draftData: [String:Any], handler: @escaping ResultHandler<Bool>) {
+        
+        let main = firestore.collection(PathName.FestivalPath).document(uuid)
+        let catalog = firestore.collection(PathName.CatalogPath).document("nameList")
+        let draft = firestore.collection(PathName.DraftPath).document(uuid)
+        
+        batch.setData(mainData, forDocument: main, merge: true)
+        batch.setData(draftData, forDocument: draft, merge: true)
+        batch.updateData(["list": FieldValue.arrayUnion([festivalName])], forDocument: catalog)
+        
+        batch.commit() { error in
+            if let _ = error {
+                handler(.failure(FirebaseError.releaseError))
             } else {
                 handler(.success(true))
             }

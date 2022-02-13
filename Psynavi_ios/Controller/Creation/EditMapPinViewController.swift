@@ -19,7 +19,7 @@ final class EditMapPinViewController: UIViewController {
     @IBOutlet weak var smokeIcon: UIImageView!
     @IBOutlet weak var toiletIcon: UIImageView!
     @IBOutlet weak var trashIcon: UIImageView!
-    var delegate: DataReturn2?
+    weak var delegate: DataReturn2?
     var selectedImageIcon = "none"
 
     // 読み込み

@@ -15,6 +15,7 @@ struct PathName {
     static let ListEventsID = "EVENTS"
     static let ListMapID = "MAP"
     static let CatalogPath = "catalog"
+    static let ReceiptPah = "receipts"
     
     
     // Storage File & Folder Path

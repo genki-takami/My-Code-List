@@ -10,7 +10,7 @@ final class EditEventImageViewController: UIViewController {
     // 変数
     @IBOutlet weak var caption: UITextView!
     @IBOutlet weak var bigImage: UIImageView!
-    var delegate: DataReturn?
+    weak var delegate: DataReturn?
     var image: UIImage!
     
     // 読み込み

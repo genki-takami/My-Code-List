@@ -67,4 +67,16 @@ final class AuthModule {
             }
         }
     }
+    
+    static func deleteUser(_ user: User, handler: @escaping ResultHandler<String>) {
+        
+        user.delete { error in
+            // エラー判定
+            if let _ = error {
+                handler(.failure(FirebaseError.deleteError))
+            } else {
+                handler(.success("削除に成功\nタブ画面に戻ります"))
+            }
+        }
+    }
 }

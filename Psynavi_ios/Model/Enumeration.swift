@@ -25,6 +25,7 @@ enum FirebaseError: Error, CustomStringConvertible {
     case fetchError
     case syncDataError
     case deleteError
+    case releaseError
     case userCreateError
     case userSignInError
     case userDisplayNameError
@@ -35,6 +36,7 @@ enum FirebaseError: Error, CustomStringConvertible {
         case .fetchError: return "データの受信に失敗しました"
         case .syncDataError: return "データの同期に失敗！再度お試しください"
         case .deleteError: return "削除に失敗しました。再度お試しください"
+        case .releaseError: return "公開に失敗しました"
         case .userCreateError: return "ユーザー作成に失敗しました"
         case .userSignInError: return "ログインに失敗しました"
         case .userDisplayNameError: return "アカウント名の登録に失敗しました"

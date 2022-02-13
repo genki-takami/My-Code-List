@@ -12,7 +12,7 @@ final class EditLinkViewController: UIViewController {
     @IBOutlet weak var url1: UITextField!
     @IBOutlet weak var title2: UITextField!
     @IBOutlet weak var url2: UITextField!
-    var delegate: DataReturn3?
+    weak var delegate: DataReturn3?
     var receiveT1 = "", receiveU1 = "", receiveT2 = "", receiveU2 = ""
     
     // 読み込み
