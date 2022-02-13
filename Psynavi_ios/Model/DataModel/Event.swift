@@ -13,7 +13,7 @@ final class Event: Object {
     @objc dynamic var password = ""
     
     // 管理用 ID
-    @objc dynamic var id = ""
+    @objc dynamic var id = NSUUID().uuidString
     
     // イベント名
     @objc dynamic var eventTitle = ""

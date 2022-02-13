@@ -7,7 +7,7 @@ import RealmSwift
 final class Annotation: Object {
     
     // 管理用 ID
-    @objc dynamic var id = ""
+    @objc dynamic var id = NSUUID().uuidString
     
     // ピンのタイトル
     @objc dynamic var title = ""

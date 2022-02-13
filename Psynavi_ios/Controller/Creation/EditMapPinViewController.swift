@@ -3,399 +3,398 @@
  */
 
 import UIKit
-import SVProgressHUD
 
 final class EditMapPinViewController: UIViewController {
     
-    // 変数
-    @IBOutlet weak var titleField: UITextField!
-    @IBOutlet weak var subtitleField: UITextField!
-    @IBOutlet weak var foodIcon: UIImageView!
-    @IBOutlet weak var displayIcon: UIImageView!
-    @IBOutlet weak var attractionIcon: UIImageView!
-    @IBOutlet weak var eventIcon: UIImageView!
-    @IBOutlet weak var benchIcon: UIImageView!
-    @IBOutlet weak var infoIcon: UIImageView!
-    @IBOutlet weak var smokeIcon: UIImageView!
-    @IBOutlet weak var toiletIcon: UIImageView!
-    @IBOutlet weak var trashIcon: UIImageView!
+    // MARK: - Property
+    @IBOutlet private weak var titleField: UITextField!
+    @IBOutlet private weak var subtitleField: UITextField!
+    @IBOutlet private weak var foodIcon: UIImageView!
+    @IBOutlet private weak var displayIcon: UIImageView!
+    @IBOutlet private weak var attractionIcon: UIImageView!
+    @IBOutlet private weak var eventIcon: UIImageView!
+    @IBOutlet private weak var benchIcon: UIImageView!
+    @IBOutlet private weak var infoIcon: UIImageView!
+    @IBOutlet private weak var smokeIcon: UIImageView!
+    @IBOutlet private weak var toiletIcon: UIImageView!
+    @IBOutlet private weak var trashIcon: UIImageView!
     weak var delegate: DataReturn2?
     var selectedImageIcon = "none"
 
-    // 読み込み
+    // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 背景をタップしたらキーボードを閉じる
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard)))
+        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        view.addGestureRecognizer(gesture)
     }
     
-    // キーボードを閉じる
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectFoodIcon(_ sender: Any) {
+    // MARK: - FOOD
+    @IBAction private func didSelectFoodIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
             break
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            displayIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            eventIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            benchIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            infoIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectFood()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectFood()
+            trashIcon.backgroundColor = UIColor.clear
+            selectFood()
         default:
-            self.selectFood()
+            selectFood()
         }
     }
     
-    func selectFood(){
-        self.foodIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "food"
+    private func selectFood(){
+        foodIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "food"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectDisplayIcon(_ sender: Any) {
+    // MARK: - DISPLAY
+    @IBAction private func didSelectDisplayIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            foodIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "display":
             break
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            eventIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            benchIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            infoIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectDisplay()
+            trashIcon.backgroundColor = UIColor.clear
+            selectDisplay()
         default:
-            self.selectDisplay()
+            selectDisplay()
         }
     }
     
-    func selectDisplay(){
-        self.displayIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "display"
+    private func selectDisplay(){
+        displayIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "display"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectAttractionIcon(_ sender: Any) {
+    // MARK: - ATTRACTION
+    @IBAction private func didSelectAttractionIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            foodIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            displayIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "attraction":
             break
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            eventIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            benchIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            infoIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectAttraction()
+            trashIcon.backgroundColor = UIColor.clear
+            selectAttraction()
         default:
-            self.selectAttraction()
+            selectAttraction()
         }
     }
     
-    func selectAttraction(){
-        self.attractionIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "attraction"
+    private func selectAttraction(){
+        attractionIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "attraction"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectEventIcon(_ sender: Any) {
+    // MARK: - EVENT
+    @IBAction private func didSelectEventIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            foodIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            displayIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "event":
             break
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            benchIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            infoIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectEvent()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectEvent()
+            trashIcon.backgroundColor = UIColor.clear
+            selectEvent()
         default:
-            self.selectEvent()
+            selectEvent()
         }
     }
     
-    func selectEvent(){
-        self.eventIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "event"
+    private func selectEvent(){
+        eventIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "event"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectBenchIcon(_ sender: Any) {
+    // MARK: - BENCH
+    @IBAction private func didSelectBenchIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            foodIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            displayIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            eventIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "bench":
             break
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            infoIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectBench()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectBench()
+            trashIcon.backgroundColor = UIColor.clear
+            selectBench()
         default:
-            self.selectBench()
+            selectBench()
         }
     }
     
-    func selectBench(){
-        self.benchIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "bench"
+    private func selectBench(){
+        benchIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "bench"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectInfoIcon(_ sender: Any) {
+    // MARK: - INFO
+    @IBAction private func didSelectInfoIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            foodIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            displayIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            eventIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            benchIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "info":
             break
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectInfo()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectInfo()
+            trashIcon.backgroundColor = UIColor.clear
+            selectInfo()
         default:
-            self.selectInfo()
+            selectInfo()
         }
     }
     
-    func selectInfo(){
-        self.infoIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "info"
+    private func selectInfo(){
+        infoIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "info"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectSmokeIcon(_ sender: Any) {
+    // MARK: - SMOKE
+    @IBAction private func didSelectSmokeIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            foodIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            displayIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            eventIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            benchIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            infoIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "smoke":
             break
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            toiletIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectSmoke()
+            trashIcon.backgroundColor = UIColor.clear
+            selectSmoke()
         default:
-            self.selectSmoke()
+            selectSmoke()
         }
     }
     
-    func selectSmoke(){
-        self.smokeIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "smoke"
+    private func selectSmoke(){
+        smokeIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "smoke"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectToiletIcon(_ sender: Any) {
+    // MARK: - TOILET
+    @IBAction private func didSelectToiletIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            foodIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            displayIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            attractionIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            eventIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            benchIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            infoIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            smokeIcon.backgroundColor = UIColor.clear
+            selectToilet()
         case "toilet":
             break
         case "trash":
-            self.trashIcon.backgroundColor = UIColor.clear
-            self.selectToilet()
+            trashIcon.backgroundColor = UIColor.clear
+            selectToilet()
         default:
-            self.selectToilet()
+            selectToilet()
         }
     }
     
-    func selectToilet(){
-        self.toiletIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "toilet"
+    private func selectToilet(){
+        toiletIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "toilet"
     }
     
-    // アイコン画像をタップして選択
-    @IBAction func didSelectTrashIcon(_ sender: Any) {
+    // MARK: - TRASH
+    @IBAction private func didSelectTrashIcon(_ sender: Any) {
         switch selectedImageIcon{
         case "food":
-            self.foodIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        foodIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "display":
-            self.displayIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        displayIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "attraction":
-            self.attractionIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        attractionIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "event":
-            self.eventIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        eventIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "bench":
-            self.benchIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        benchIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "info":
-            self.infoIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        infoIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "smoke":
-            self.smokeIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        smokeIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "toilet":
-            self.toiletIcon.backgroundColor = UIColor.clear
-            self.selectTrash()
+        toiletIcon.backgroundColor = UIColor.clear
+        selectTrash()
         case "trash":
             break
         default:
-            self.selectTrash()
+        selectTrash()
         }
     }
     
-    func selectTrash(){
-        self.trashIcon.backgroundColor = UIColor.lightGray
-        self.selectedImageIcon = "trash"
+    private func selectTrash(){
+        trashIcon.backgroundColor = UIColor.lightGray
+        selectedImageIcon = "trash"
     }
     
-    // 閉じる
-    @IBAction func showDown(_ sender: Any) {
-        if let t1 = titleField.text, let t2 = subtitleField.text{
+    // MARK: - SHUTDOWN
+    @IBAction private func showDown(_ sender: Any) {
+        
+        if let mainTitle = titleField.text, let subtitle = subtitleField.text {
             
-            if t1.isEmpty || t2.isEmpty || selectedImageIcon == "none"{
-                SVProgressHUD.showError(withStatus: "タイトルとサブタイトルを記入し、アイコンを選択してください")
+            if mainTitle.isEmpty || subtitle.isEmpty || selectedImageIcon == "none" {
+                DisplayPop.error("タイトルとサブタイトルを記入し、アイコンを選択してください")
             } else {
                 // 遷移元にデータを渡す
-                delegate?.returnData2(titleData: t1, subtitleData: t2, imageData: selectedImageIcon)
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
+                delegate?.returnData2(titleData: mainTitle, subtitleData: subtitle, imageData: selectedImageIcon)
+                presentingViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }

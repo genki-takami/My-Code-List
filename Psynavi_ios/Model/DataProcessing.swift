@@ -41,6 +41,26 @@ final class DataProcessing {
                     case .map:
                         realm.add(object as! Map, update: .modified)
                     }
+                case .modify:
+                    switch model {
+                    case .map:
+                        let festivalData = object as! Map
+                        festivalData.latitude = data["latitude"] as! Double
+                        festivalData.longitude = data["longitude"] as! Double
+                        festivalData.annotations.removeAll()
+                        for i in (data["pinList"] as! [(String,String,String,Double,Double)]) {
+                            let myAnnotation = Annotation()
+                            myAnnotation.title = i.0
+                            myAnnotation.subtitle = i.1
+                            myAnnotation.pinImage = i.2
+                            myAnnotation.latitude = i.3
+                            myAnnotation.longitude = i.4
+                            festivalData.annotations.append(myAnnotation)
+                        }
+                        realm.add(festivalData, update: .modified)
+                    default:
+                        break
+                    }
                 }
             }
             handler(.success("保存しました"))

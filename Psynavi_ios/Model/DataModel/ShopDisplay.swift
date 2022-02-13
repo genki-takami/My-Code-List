@@ -13,7 +13,7 @@ final class ShopDisplay: Object {
     @objc dynamic var password = ""
     
     // 管理用 ID
-    @objc dynamic var id = ""
+    @objc dynamic var id = NSUUID().uuidString
     
     // 店か展示か
     @objc dynamic var switchFlag = true

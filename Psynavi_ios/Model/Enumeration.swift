@@ -54,6 +54,7 @@ enum RealmModel {
 
 enum EditMode {
     case add
+    case modify
 }
 
 enum PostMode {

@@ -13,7 +13,7 @@ final class Map: Object {
     @objc dynamic var password = ""
     
     // 管理用 ID
-    @objc dynamic var id = "init"
+    @objc dynamic var id = NSUUID().uuidString
     
     // 緯度
     @objc dynamic var latitude = 35.681236

@@ -13,7 +13,7 @@ final class Notices: Object {
     @objc dynamic var password = ""
     
     // 管理用 ID
-    @objc dynamic var id = ""
+    @objc dynamic var id = NSUUID().uuidString
     
     // 件名
     @objc dynamic var noticeTitle = ""
