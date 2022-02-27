@@ -30,27 +30,23 @@ final class EditMainViewController: UIViewController, UINavigationControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // UIをセットアップ
-        setUpUIData()
-        
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
+        setupView()
     }
     
     // MARK: - VIEWDIDAPPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 注意書きを表示
+        /// 注意書きを表示
         popMessage()
     }
     
-    // アイコンのライブラリピッカー
+    // MARK: - ICON IMAGE
     @IBAction private func selectIconImage(_ sender: Any) {
         pickingStart(.photoLibrary, "icon")
     }
     
-    // ワイド(背景)画像のライブラリピッカー
+    // MARK: - BACKGROUND IMAGE
     @IBAction private func selectBackgroundImage(_ sender: Any) {
         pickingStart(.photoLibrary, "background")
     }
@@ -102,7 +98,7 @@ final class EditMainViewController: UIViewController, UINavigationControllerDele
             let editMapVC = segue.destination as! EditMapViewController
             editMapVC.mailAdress = mailAdress
             editMapVC.password = password
-            if let data = (DataProcessing.findAll(RealmModel.map) as! Results<Map>)
+            if let data = (RealmTask.findAll(RealmModel.map) as! Results<Map>)
                                             .first(where: { $0.mailAdress == mailAdress && $0.password == password }) {
                 editMapVC.festivalData = data
             } else {

@@ -8,7 +8,7 @@ final class HomeTabViewController: UIViewController {
 
     // MARK: - Property
     @IBOutlet weak var festivalList: UITableView!
-    @IBOutlet private weak var search: UISearchBar!
+    @IBOutlet weak var search: UISearchBar!
     var dataArray = [HomeTabCellData]()
     var filteringDataArray = [HomeTabCellData]()
     var nameList = [String]()
@@ -19,41 +19,25 @@ final class HomeTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSearchBar()
-        setupTableView()
-        
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
-    }
-    
-    // MARK: - SETUP
-    private func setupSearchBar() {
         search.delegate = self
-        search.searchBarStyle = .minimal
-    }
-    
-    private func setupTableView() {
         festivalList.delegate = self
         festivalList.dataSource = self
-        festivalList.separatorStyle = .none
-        festivalList.refreshControl = UIRefreshControl()
-        festivalList.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        // カスタムセルの登録
-        festivalList.register(UINib(nibName: "HomeTabListViewCell", bundle: nil), forCellReuseIdentifier: "HomeCell")
+        
+        setupView()
     }
     
     // MARK: - VIEWWILLAPPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        FetchData.isListenerNil() ? fetchData() : starCheck()
+        FetchData.isListenerNil() ? fetchSnapshot() : updateStar()
     }
     
-    // 検索前に戻す
-    @IBAction private func refreshHome(_ sender: Any) {
-        filteringDataArray = []
-        noneFlag = false
-        festivalList.reloadData()
+    // MARK: - VIEWDIDAPPEAR
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        fetchCatalog()
     }
     
     // MARK: - PREPARE FOR SEGUE
@@ -62,7 +46,7 @@ final class HomeTabViewController: UIViewController {
         if segue.identifier == "viewFromHomeSegue"{
             let mainVC = segue.destination as! MainViewController
             let indexPath = sender as! IndexPath
-            // 検索ヒットがあれば、それから参照
+            /// 検索してヒットしたデータがあれば、そこから参照
             if filteringDataArray.count > 0 {
                 mainVC.uuid = filteringDataArray[indexPath.row].uuid
             } else {
@@ -71,11 +55,10 @@ final class HomeTabViewController: UIViewController {
         }
     }
     
-    // MARK: - VIEWDIDAPPEAR
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // カタログを受信する
-        receiveCatalog()
+    // MARK: - Refresh
+    @IBAction private func refreshHome(_ sender: Any) {
+        filteringDataArray = []
+        noneFlag = false
+        reloadTable()
     }
 }

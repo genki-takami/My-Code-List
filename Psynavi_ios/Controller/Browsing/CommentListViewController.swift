@@ -7,8 +7,8 @@ import UIKit
 final class CommentListViewController: UIViewController {
 
     // MARK: - Property
-    var comments = [[String:Any]]()
     @IBOutlet private weak var commentTable: UITableView!
+    var comments = [[String:Any]]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {

@@ -6,7 +6,7 @@ import UIKit
 
 final class SettingTabViewController: UIViewController {
 
-    // iPhoneの設定アプリまで飛ぶ
+    /// iPhoneの設定アプリまで飛ぶ
     @IBAction private func goToSetting(_ sender: Any) {
         
         if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {

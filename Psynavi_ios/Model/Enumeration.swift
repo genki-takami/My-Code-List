@@ -1,14 +1,31 @@
 /*
- 列挙型
+ 作成した列挙型
  */
 
-import Foundation
+enum EditMode {
+    case add
+    case modify
+}
+
+enum PostMode {
+    case inquiry
+    case comment
+}
+
+enum RealmModel {
+    case favorite
+    case content
+    case event
+    case notice
+    case map
+}
 
 enum RealmError: Error, CustomStringConvertible {
     case saveError
     case deleteError
     case register
     case disregister
+    
     var description: String {
         switch self {
         case .saveError: return "保存に失敗にました！"
@@ -29,6 +46,7 @@ enum FirebaseError: Error, CustomStringConvertible {
     case userCreateError
     case userSignInError
     case userDisplayNameError
+    
     var description: String {
         switch self {
         case .postError: return "送信に失敗"
@@ -42,22 +60,4 @@ enum FirebaseError: Error, CustomStringConvertible {
         case .userDisplayNameError: return "アカウント名の登録に失敗しました"
         }
     }
-}
-
-enum RealmModel {
-    case favorite
-    case content
-    case event
-    case notice
-    case map
-}
-
-enum EditMode {
-    case add
-    case modify
-}
-
-enum PostMode {
-    case inquiry
-    case comment
 }

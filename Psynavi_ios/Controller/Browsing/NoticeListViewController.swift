@@ -7,8 +7,8 @@ import UIKit
 final class NoticeListViewController: UIViewController {
     
     // MARK: - Property
-    var notices = [NoticeParam]()
     @IBOutlet private weak var noticeTable: UITableView!
+    var notices = [NoticeParam]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {

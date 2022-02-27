@@ -2,7 +2,6 @@
  公開オブジェクトのマップ表示処理
  */
 
-import UIKit
 import MapKit
 
 final class MapViewController: UIViewController {
@@ -19,7 +18,7 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
 
         mapView.delegate = self
-        setUpMaps()
+        setupView()
     }
     
     // MARK: - マップの種類を変更

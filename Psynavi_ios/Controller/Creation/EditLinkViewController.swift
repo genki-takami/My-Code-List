@@ -18,34 +18,33 @@ final class EditLinkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // セットアップ
+        setupView()
+    }
+    
+    private func setupView() {
         title1.text = receiveT1
         url1.text = receiveU1
         title2.text = receiveT2
         url2.text = receiveU2
         
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+        setDismissKeyboard()
     }
     
     // MARK: - SAVE
     @IBAction private func save(_ sender: Any) {
         
-        if let t1 = title1.text, let u1 = url1.text, let t2 = title2.text, let u2 = url2.text {
-            
-            if (t1.isEmpty || u1.isEmpty) && (t2.isEmpty || u2.isEmpty) {
-                DisplayPop.error("必ず１セット以上入力して下さい")
-                return
-            }
-            
-            // 遷移元にデータを渡して閉じる
-            delegate?.returnData3(t1: t1, u1: u1, t2: t2, u2: u2)
-            dismiss(animated: true, completion: nil)
-            DisplayPop.success("保存しました")
+        guard let t1 = title1.text, let u1 = url1.text, let t2 = title2.text, let u2 = url2.text else {
+            return
         }
+        
+        if (t1.isEmpty || u1.isEmpty) && (t2.isEmpty || u2.isEmpty) {
+            Modal.showError("必ず１セット以上入力して下さい")
+            return
+        }
+        
+        /// 遷移元にデータを渡して閉じる
+        delegate?.returnData3(t1: t1, u1: u1, t2: t2, u2: u2)
+        dismiss(animated: true, completion: nil)
+        Modal.showSuccess("保存しました")
     }
 }

@@ -14,35 +14,29 @@ final class InquiryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+        setDismissKeyboard()
     }
     
     // MARK: - 送信
     @IBAction private func sendContents(_ sender: Any) {
         
-        if let title = contentsTitle.text, let content = contents.text {
+        guard let title = contentsTitle.text, let content = contents.text else { return }
+        
+        if title.isEmpty || content.isEmpty {
+            Modal.showError("タイトルと内容を記してください！")
+        } else {
             
-            if title.isEmpty || content.isEmpty{
-                DisplayPop.error("タイトルと内容を記してください！")
-            } else {
-                
-                let postDoc: [String:Any] = [
-                    "title" : title,
-                    "content" : content,
-                ]
-                
-                PostData.postDocument(postDoc, PathName.InquiryPath, "", PostMode.inquiry) { result in
-                    switch result {
-                    case .success(let text):
-                        DisplayPop.success(text)
-                    case .failure(let error):
-                        DisplayPop.error(error.localizedDescription)
-                    }
+            let inquiryData: [String:Any] = [
+                "title" : title,
+                "content" : content,
+            ]
+            
+            PostData.postDocument(inquiryData, PathName.InquiryPath, "", PostMode.inquiry) { result in
+                switch result {
+                case .success(let text):
+                    Modal.showSuccess(text)
+                case .failure(let error):
+                    Modal.showError(String(describing: error))
                 }
             }
         }

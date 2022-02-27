@@ -17,9 +17,8 @@ final class FavoriteTabViewController: UIViewController {
         
         favoriteList.delegate = self
         favoriteList.dataSource = self
-        favoriteList.separatorStyle = .none
-        // カスタムセルの登録する
-        favoriteList.register(UINib(nibName: "FavoriteTabListViewCell", bundle: nil), forCellReuseIdentifier: "FavoriteCell")
+        
+        setupView()
     }
     
     // MARK: - VIEWWILLAPPEAR
@@ -28,7 +27,7 @@ final class FavoriteTabViewController: UIViewController {
         
         // お気に入りデータを参照
         favorites.removeAll()
-        let data = DataProcessing.findAll(RealmModel.favorite) as! Results<Favorite>
+        let data = RealmTask.findAll(RealmModel.favorite) as! Results<Favorite>
         data.forEach {
             favorites.append($0)
         }

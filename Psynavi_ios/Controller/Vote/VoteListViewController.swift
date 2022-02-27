@@ -20,15 +20,16 @@ final class VoteListViewController: UIViewController {
 
         voteTable.delegate = self
         voteTable.dataSource = self
-        voteTable.tableFooterView = UIView()
+        
+        setupView()
     }
     
     // MARK: - VIEWDIDAPPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 投票イベントデータを取得する
-        getVotes()
+        /// 投票イベントデータを取得する
+        fetchVoteData()
     }
     
     // MARK: - PREPARE FOR SEGUE
@@ -37,7 +38,6 @@ final class VoteListViewController: UIViewController {
         let indexPath = voteTable.indexPathForSelectedRow
         
         switch segue.identifier {
-        
         case "voteDetailSegue":
             let voreOperationVC = segue.destination as! VoteOperationViewController
             voreOperationVC.vTitle = voteList[indexPath!.row]["name"] as? String ?? "NaN"

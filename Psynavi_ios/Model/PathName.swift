@@ -1,11 +1,9 @@
 /*
- 多用するであろう文字列を格納する構造体ファイル
+ アクセスするデータサーバーのコレクション/ドキュメント/画像のパス
  */
 
-import Foundation
-
 struct PathName {
-    // Firestore Collection Path
+    /// Firestore collection and document path
     static let FestivalPath = "campus-festival"
     static let DraftPath = "draft-festival"
     static let InquiryPath = "inquiry"
@@ -18,7 +16,7 @@ struct PathName {
     static let ReceiptPah = "receipts"
     
     
-    // Storage File & Folder Path
+    /// Storage file and folder path
     static let ContentImagePath = "content-image"
     static let EventImagePath = "event-image"
     static let ContentVideoPath = "content-video"

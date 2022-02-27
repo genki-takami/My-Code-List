@@ -4,7 +4,7 @@
 
 import Foundation
 
-// これは構造体じゃない
+/// これは構造体じゃない
 final class Festival: NSObject {
     var id: String = ""
     var name: String = ""

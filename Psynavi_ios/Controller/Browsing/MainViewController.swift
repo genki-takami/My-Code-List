@@ -34,37 +34,32 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.refreshControl = UIRefreshControl()
-        scrollView.refreshControl?.addTarget(self, action: #selector(refrefhing), for: .valueChanged)
-        
-        setUpCommentName()
-        
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
+        setupView()
     }
     
     // MARK: - JUMP TO WEBSITE 1
     @IBAction private func goToWebsite1(_ sender: Any) {
+        
         guard let jumpLink1 = url1 else { return }
         showBrowser(jumpLink1)
     }
     
     // MARK: - JUMP TO WEBSITE 2
     @IBAction private func goToWebsite2(_ sender: Any) {
+        
         guard let jumpLink2 = self.url2 else { return }
         showBrowser(jumpLink2)
     }
     
-    // コメントを送る
+    /// コメントを送る
     @IBAction private func sendComment(_ sender: Any) {
-        if let cmt = commentText.text, let cmn = commentName.text {
-            
-            if cmt.isEmpty {
-                DisplayPop.error("コメントがありません！")
-                return
-            }
-            
-            sendAlert(cmt, cmn)
+        
+        guard let cmt = commentText.text, let cmn = commentName.text else { return }
+        
+        if cmt.isEmpty {
+            Modal.showError("コメントがありません！")
+        } else {
+            sendComment(cmt, cmn)
         }
     }
     
@@ -72,7 +67,8 @@ final class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         if isFirstFetch {
-            DisplayPop.show()
+            
+            Modal.show()
             
             FetchData.fetchDocument(PathName.FestivalPath, uuid) { result in
                 switch result {
@@ -98,8 +94,8 @@ final class MainViewController: UIViewController {
                     self.fetchAllData()
                     
                 case .failure(let error):
-                    DisplayPop.error(error.localizedDescription)
                     self.backToHomeTab()
+                    Modal.showError(String(describing: error))
                 }
             }
         }

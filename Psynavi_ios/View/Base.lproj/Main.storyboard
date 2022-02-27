@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q8H-0M-a5O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q8H-0M-a5O">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -230,7 +230,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="voteChoiseCell" id="UUC-Qf-P2L">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UUC-Qf-P2L" id="Kwa-gq-acs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -594,7 +594,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="voteListCell" rowHeight="60" id="u9t-Zq-Ocm">
-                                        <rect key="frame" x="0.0" y="24.5" width="390" height="60"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u9t-Zq-Ocm" id="ySv-rs-5w1">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
@@ -1100,7 +1100,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentsCell" textLabel="V3o-Hl-2yw" detailTextLabel="wCS-ye-ABF" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="w1H-is-EYZ">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="90"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1H-is-EYZ" id="fsw-Jh-qZ9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
@@ -2379,7 +2379,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="noticeCell" textLabel="Dlg-Ic-IYH" detailTextLabel="zXA-31-DZL" style="IBUITableViewCellStyleSubtitle" id="rJg-dB-xo4">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="54.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rJg-dB-xo4" id="CrO-L5-8v8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54.5"/>
@@ -2517,7 +2517,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="eventCell" textLabel="fbJ-A8-a9j" detailTextLabel="WAe-3j-Geu" style="IBUITableViewCellStyleSubtitle" id="s2q-KH-opI">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="54.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="54.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s2q-KH-opI" id="G4D-iN-k3I">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54.5"/>
@@ -2871,7 +2871,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="readingNoticeCell" rowHeight="201" id="XPN-B9-7S4">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="201"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="201"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XPN-B9-7S4" id="qTi-f4-oUQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="201"/>
@@ -4133,7 +4133,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75031043046357615" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentListCell" rowHeight="140" id="EzV-zz-lyZ">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="140"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EzV-zz-lyZ" id="TZq-w5-2bc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
@@ -4639,7 +4639,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c4U-ZG-QT6" userLabel="投票ボタン">
-                                                <rect key="frame" x="347" y="233" width="59" height="36"/>
+                                                <rect key="frame" x="346" y="233" width="60" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="Lt1-6I-q8c"/>
                                                 </constraints>
@@ -4816,7 +4816,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="readingEventsCell" rowHeight="67" id="YLc-6y-V1l">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="67"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YLc-6y-V1l" id="REH-cR-t4J">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
@@ -5056,7 +5056,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="readingDisplayCell" rowHeight="125" id="KyH-6p-8PP">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="125"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KyH-6p-8PP" id="XST-8E-R8F">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
@@ -5205,7 +5205,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="readingShopCell" rowHeight="125" id="akF-V5-VR5">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="125"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="akF-V5-VR5" id="a88-nh-gWg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
@@ -6249,7 +6249,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noticeBarCell" rowHeight="99" id="tLQ-EI-KDe">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="99"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="99"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tLQ-EI-KDe" id="tCT-Wq-PBO">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
@@ -6922,7 +6922,7 @@ Psyなび Studio (推奨：Chrome, Safari)
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">＜バージョン1.0.0＞
+                                        <mutableString key="content">＜バージョン1.0.0＞
 アプリのリリース
 ＜バージョン1.0.1＞
 バグの修正とパフォーマンスの向上
@@ -6945,14 +6945,17 @@ Psyなび Studio (推奨：Chrome, Safari)
 ＜バージョン2.2.1＞
 イベント編集時に設定した画像を削除可能になりました
 ＜バージョン2.2.2＞
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="17" name="HiraMaruProN-W4"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="バグの修正">
+                                    <fragment>
+                                        <string key="content">バグの修正
+＜バージョン3.0.0＞
+パフォーマンスの向上</string>
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="17" name="HiraMaruProN-W4"/>
@@ -7306,8 +7309,8 @@ PsyなびStudio(ブラウザ)にて変更できます。
         <image name="tag.fill" catalog="system" width="128" height="119"/>
         <image name="third" width="256" height="256"/>
         <image name="toilet" width="512" height="512"/>
-        <image name="trash" width="512" height="512"/>
         <image name="trash" catalog="system" width="121" height="128"/>
+        <image name="trash" width="512" height="512"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -7342,7 +7345,7 @@ PsyなびStudio(ブラウザ)にて変更できます。
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

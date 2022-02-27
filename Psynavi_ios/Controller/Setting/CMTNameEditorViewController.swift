@@ -14,33 +14,27 @@ final class CMTNameEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 既に保存した名前があれば表示する
-        if let commentName = DataProcessing.getUserData("commentName") {
+        /// 既に保存した名前があれば表示する
+        if let commentName = UserDefaultsTask.getUserData("commentName") {
             currentCommentName.text = commentName
         } else {
             currentCommentName.text = "匿名"
         }
         
-        let gesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+        setDismissKeyboard()
     }
     
     // MARK: - コメントネームを変更する
     @IBAction private func changeCommentName(_ sender: Any) {
         
-        if let name = newCommentName.text {
-            
-            if name.isEmpty {
-                DisplayPop.error("新しいコメントネームを入力して下さい")
-            } else {
-                DataProcessing.setUserData(name, "commentName")
-                currentCommentName.text = name
-                DisplayPop.success("コメントネームを更新しました！")
-            }
+        guard let name = newCommentName.text else { return }
+        
+        if name.isEmpty {
+            Modal.showError("新しいコメントネームを入力して下さい")
+        } else {
+            UserDefaultsTask.setUserData(name, "commentName")
+            currentCommentName.text = name
+            Modal.showSuccess("コメントネームを更新しました！")
         }
     }
 }
