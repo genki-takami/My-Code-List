@@ -3,20 +3,19 @@
  */
 
 import RealmSwift
-import Foundation
 
 class Place: Object {
     
-    // 管理id
+    /// 管理id
     @objc dynamic var id = NSUUID().uuidString
     
-    // フォルダ認識用
+    /// フォルダ認識用
     @objc dynamic var folderId = ""
     
-    // 会議場所
+    /// 会議場所
     @objc dynamic var meetingPlace = ""
     
-    // id をプライマリーキーとして設定
+    /// id をプライマリーキーとして設定
     override static func primaryKey() -> String? {
         return "id"
     }

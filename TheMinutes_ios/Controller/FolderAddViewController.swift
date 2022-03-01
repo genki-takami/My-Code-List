@@ -14,12 +14,7 @@ final class FolderAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tapGesture = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+        setDismissKeyboard()
     }
     
     // MARK: - ADD FOLDER
@@ -28,17 +23,18 @@ final class FolderAddViewController: UIViewController {
         guard let name = folderNameTextField.text else { return }
         
         if name.isEmpty {
-            DisplayPop.error("フォルダー名を記入してください")
+            Modal.showError("フォルダー名を記入してください")
         } else {
             
             folder.folderName = name
-            DataProcessing.add(folder, [:], EditMode.add, RealmModel.folder) { result in
+            
+            RealmTask.add(folder, [:], EditMode.add, RealmModel.folder) { result in
                 switch result {
                 case .success(let text):
                     self.dismiss(animated: true, completion: nil)
-                    DisplayPop.success(text)
+                    Modal.showSuccess(text)
                 case .failure(let error):
-                    DisplayPop.error(error.localizedDescription)
+                    Modal.showError(String(describing: error))
                 }
             }
         }

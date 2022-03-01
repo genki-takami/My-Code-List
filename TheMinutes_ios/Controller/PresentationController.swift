@@ -6,10 +6,10 @@ import UIKit
 
 class PresentationController: UIPresentationController {
     
-    // 呼び出し元のViewControllerの上に重ねるオーバレイView
+    /// 呼び出し元のViewControllerの上に重ねるオーバレイView
     var overlayView = UIView()
 
-    // 表示トランジション開始前に呼ばれる
+    /// 表示トランジション開始前に呼ばれる
     override func presentationTransitionWillBegin() {
         guard let containerView = containerView else { return }
         
@@ -19,20 +19,20 @@ class PresentationController: UIPresentationController {
         overlayView.alpha = 0.0
         containerView.insertSubview(overlayView, at: 0)
 
-        // トランジションを実行
+        /// トランジションを実行
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
             self?.overlayView.alpha = 0.5
-            }, completion:nil)
+        }, completion:nil)
     }
 
-    // 非表示トランジション開始前に呼ばれる
+    /// 非表示トランジション開始前に呼ばれる
     override func dismissalTransitionWillBegin() {
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] context in
             self?.overlayView.alpha = 0.0
-            }, completion:nil)
+        }, completion:nil)
     }
 
-    // 非表示トランジション開始後に呼ばれる
+    /// 非表示トランジション開始後に呼ばれる
     override func dismissalTransitionDidEnd(_ completed: Bool) {
         if completed {
             overlayView.removeFromSuperview()
@@ -41,12 +41,12 @@ class PresentationController: UIPresentationController {
 
     let margin = (x: CGFloat(40), y: CGFloat(220.0))
     
-    // 子のコンテナサイズを返す
+    /// 子のコンテナサイズを返す
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         return CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
     }
 
-    // 呼び出し先のView Controllerのframeを返す
+    /// 呼び出し先のView Controllerのframeを返す
     override var frameOfPresentedViewInContainerView: CGRect {
         var presentedViewFrame = CGRect()
         let containerBounds = containerView!.bounds
@@ -58,7 +58,7 @@ class PresentationController: UIPresentationController {
         return presentedViewFrame
     }
 
-    // レイアウト開始前に呼ばれる
+    /// レイアウト開始前に呼ばれる
     override func containerViewWillLayoutSubviews() {
         overlayView.frame = containerView!.bounds
         presentedView?.frame = frameOfPresentedViewInContainerView
@@ -66,11 +66,11 @@ class PresentationController: UIPresentationController {
         presentedView?.clipsToBounds = true
     }
 
-    // レイアウト開始後に呼ばれる
+    /// レイアウト開始後に呼ばれる
     override func containerViewDidLayoutSubviews() {
     }
 
-    // overlayViewをタップした時に呼ばれる
+    /// overlayViewをタップした時に呼ばれる
     @objc func overlayViewDidTouch(_ sender: UITapGestureRecognizer) {
         presentedViewController.dismiss(animated: true, completion: nil)
     }

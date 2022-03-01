@@ -2,15 +2,16 @@
  データ処理
  */
 
-import Foundation
 import RealmSwift
 
-typealias ResultHandler<T> = (Result<T, Error>) -> Void
-
-final class DataProcessing {
+final class RealmTask {
     
+    /// Realm instance
     static let realm = try! Realm()
     
+    /// - Parameters:
+    ///   - model:      The given type stored in the Realm.
+    /// - Returns:      All objects of the given type stored in the Realm.
     static func findAll(_ model: RealmModel) -> Any {
         switch model {
         case .folder:
@@ -24,6 +25,12 @@ final class DataProcessing {
         }
     }
     
+    /// - Parameters:
+    ///   - object:     The object to be added or modified to this Realm.
+    ///   - data:       The data to modify each object paramerters.
+    ///   - mode:       The type of save process is add or modify
+    ///   - model:      The given type stored in the Realm.
+    /// - Returns:      If it succeeds, it returns that fact, and if it fails, it returns the error content.
     static func add<T>(_ object: T, _ data: [String:Any], _ mode: EditMode, _ model: RealmModel, handler: @escaping ResultHandler<String>) {
         do {
             try realm.write {
@@ -63,11 +70,30 @@ final class DataProcessing {
         }
     }
     
+    /// - Parameters:
+    ///   - object:     The object to be deleted.
+    ///   - model:      The given type stored in the Realm.
+    /// - Returns:      If it succeeds, it returns that fact, and if it fails, it returns the error content.
     static func delete<T>(_ object: T, _ model: RealmModel, handler: @escaping ResultHandler<String>) {
         do {
             try realm.write {
                 switch model {
-                case .folder: realm.delete(object as! Folder)
+                case .folder:
+                    let folder = object as! Folder
+                    let id = folder.id
+                    
+                    /// フォルダー下のデータも削除
+                    (RealmTask.findAll(RealmModel.minute) as! Results<Minute>).filter("folderId == %@", id).forEach {
+                        realm.delete($0)
+                    }
+                    (RealmTask.findAll(RealmModel.place) as! Results<Place>).filter("folderId == %@", id).forEach {
+                        realm.delete($0)
+                    }
+                    (RealmTask.findAll(RealmModel.attendee) as! Results<Attendee>).filter("folderId == %@", id).forEach {
+                        realm.delete($0)
+                    }
+                    
+                    realm.delete(folder)
                 case .minute: realm.delete(object as! Minute)
                 case .place: realm.delete(object as! Place)
                 case .attendee: realm.delete(object as! Attendee)

@@ -2,7 +2,6 @@
  PDFを作成するクラス
  */
 
-import UIKit
 import PDFKit
 
 final class PDFViewController: UIViewController {
@@ -15,10 +14,10 @@ final class PDFViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // データを挿入
+        /// データを挿入
         data = PDF.create(minute)
         
-        // 背後にPDFを表示する
+        /// 背後にPDFを表示する
         let pdfView = PDFView()
         pdfView.frame = view.bounds
         pdfView.autoScales = true
@@ -32,7 +31,7 @@ final class PDFViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 共有モーダルを表示
+        /// 共有モーダルを表示
         let activityVC = ShareData.modePDF(data)
         present(activityVC, animated: true, completion: nil)
     }

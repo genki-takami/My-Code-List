@@ -6,22 +6,22 @@ import UIKit
 
 extension ResisterAddViewController: UITableViewDelegate, UITableViewDataSource {
     
+    /// セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var cellCount = 0
-        
         if tableView.isEqual(attendeeList) {
-            cellCount = attendees.count
+            return attendees.count
         } else if tableView.isEqual(placeList) {
-            cellCount = places.count
+            return places.count
+        } else {
+            fatalError()
         }
-        
-        return cellCount
     }
 
+    /// セルの内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: getCellIdentifier(tableView), for:indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: setCellIdentifier(tableView), for:indexPath as IndexPath)
         
         if tableView.isEqual(attendeeList) {
             cell.textLabel?.text = attendees[indexPath.row].attendeeName
@@ -31,51 +31,54 @@ extension ResisterAddViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
+    
+    /// セルの識別
+    private func setCellIdentifier(_ tableView: UITableView) -> String {
+        
+        if tableView.isEqual(attendeeList) {
+            return "attendeeCell"
+        } else if tableView.isEqual(placeList) {
+            return "placeCell"
+        } else {
+            fatalError()
+        }
+    }
 
+    /// セルは削除可能
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
         return .delete
     }
 
+    /// データベースから削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        // データベースから削除する
+        
         if editingStyle == .delete {
+            
             if tableView.isEqual(attendeeList) {
-                DataProcessing.delete(attendees[indexPath.row], RealmModel.attendee) { result in
+                
+                RealmTask.delete(attendees[indexPath.row], RealmModel.attendee) { result in
                     switch result {
                     case .success(let text):
-                        DisplayPop.success(text)
+                        Modal.showSuccess(text)
                         self.attendees.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .fade)
                     case .failure(let error):
-                        DisplayPop.error(error.localizedDescription)
+                        Modal.showError(String(describing: error))
                     }
                 }
             } else if tableView.isEqual(placeList) {
-                DataProcessing.delete(places[indexPath.row], RealmModel.place) { result in
+                
+                RealmTask.delete(places[indexPath.row], RealmModel.place) { result in
                     switch result {
                     case .success(let text):
-                        DisplayPop.success(text)
+                        Modal.showSuccess(text)
                         self.places.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .fade)
                     case .failure(let error):
-                        DisplayPop.error(error.localizedDescription)
+                        Modal.showError(String(describing: error))
                     }
                 }
             }
         }
-    }
-    
-    // セルの識別
-    private func getCellIdentifier(_ tableView: UITableView) -> String {
-        
-        var cellIdentifier = ""
-        
-        if tableView.isEqual(attendeeList) {
-            cellIdentifier = "attendeeCell"
-        } else if tableView.isEqual(placeList) {
-            cellIdentifier = "placeCell"
-        }
-        
-        return cellIdentifier
     }
 }

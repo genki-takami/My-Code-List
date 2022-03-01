@@ -2,8 +2,6 @@
  列挙型
  */
 
-import Foundation
-
 enum RealmError: Error, CustomStringConvertible {
     case saveError
     case deleteError

@@ -13,7 +13,7 @@
 言語：Swift
 IDE：Xcode
 ツール：CocoaPods
-外部ライブラリ：RealmSwift、SVProgressHUD
+外部ライブラリ：RealmSwift(10.22.0)、SVProgressHUD(2.2.5)
 ```
 
 ### 開発ヒストリー

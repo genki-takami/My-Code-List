@@ -2,7 +2,6 @@
  議事録ファイルリストの処理
  */
 
-import UIKit
 import RealmSwift
 
 final class MinuteListViewController: UIViewController {
@@ -12,26 +11,25 @@ final class MinuteListViewController: UIViewController {
     @IBOutlet private weak var minuteList: UITableView!
     var folderId: String!
     var titleName: String!
-    var minutes: [Minute] = []
+    var minutes = [Minute]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // タイトルを変更する
-        headerTitile.text = titleName
-        
         minuteList.delegate = self
         minuteList.dataSource = self
+        /// タイトルを変更する
+        headerTitile.text = titleName
     }
     
     // MARK: - VIEWWILLAPPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // 議事録を参照する
+        /// 議事録を参照する
         minutes.removeAll()
-        let data = DataProcessing.findAll(RealmModel.minute) as! Results<Minute>
+        let data = RealmTask.findAll(RealmModel.minute) as! Results<Minute>
         let sortedData = data.filter("folderId == %@", folderId!).sorted(byKeyPath: "date", ascending: false)
         sortedData.forEach {
             minutes.append($0)
