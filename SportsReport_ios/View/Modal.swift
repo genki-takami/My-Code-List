@@ -2,19 +2,18 @@
  SVProgressHUDの処理
  */
 
-import Foundation
 import SVProgressHUD
 
-final class DisplayPop {
+final class Modal {
     
     private static var initializing = false
     
-    static func success(_ text: String) {
+    static func showSuccess(_ text: String) {
         if initializing == false { setting() }
         SVProgressHUD.showSuccess(withStatus: text)
     }
     
-    static func error(_ text: String) {
+    static func showError(_ text: String) {
         if initializing == false { setting() }
         SVProgressHUD.showError(withStatus: text)
     }

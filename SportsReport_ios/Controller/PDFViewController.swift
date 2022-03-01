@@ -2,24 +2,23 @@
  PDFを作成するクラス
  */
 
-import UIKit
 import PDFKit
 
 final class PDFViewController: UIViewController {
     
     // MARK: - Property
+    private var data: Data!
     var reportText: String = ""
     var image: UIImage! = UIImage(named: "launchicon")
-    private var data: Data!
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // データを挿入
+        /// データを挿入
         data = PDF.create(reportText, image)
         
-        // 背後にPDFを表示する
+        /// 背後にPDFを表示する
         let pdfView = PDFView()
         pdfView.frame = view.bounds
         pdfView.autoScales = true
@@ -33,7 +32,7 @@ final class PDFViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // 共有モーダルを表示
+        /// 共有モーダルを表示
         let activityVC = ShareData.modePDF(data)
         present(activityVC, animated: true, completion: nil)
     }

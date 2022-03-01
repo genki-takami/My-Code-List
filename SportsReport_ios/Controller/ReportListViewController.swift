@@ -8,7 +8,7 @@ final class ReportListViewController: UIViewController {
     
     // MARK: - Property
     @IBOutlet private weak var reportTable: UITableView!
-    var reports: [Report] = []
+    var reports = [Report]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
@@ -22,13 +22,18 @@ final class ReportListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // レポートを参照する
+        /// レポートを参照する
         reports.removeAll()
-        let data = DataProcessing.findAll().sorted(byKeyPath: "date", ascending: false)
+        let data = RealmTask.findAll().sorted(byKeyPath: "date", ascending: false)
         data.forEach {
             reports.append($0)
         }
         reportTable.reloadData()
+    }
+    
+    // MARK: - ADD NEW
+    @IBAction private func addNew(_ sender: Any) {
+        performSegue(withIdentifier: "add", sender: nil)
     }
     
     // MARK: - PREPARE FOR SEGUE
@@ -43,10 +48,5 @@ final class ReportListViewController: UIViewController {
             let newReport = Report()
             inputViewController.report = newReport
         }
-    }
-    
-    // MARK: - ADD NEW
-    @IBAction private func addNew(_ sender: Any) {
-        performSegue(withIdentifier: "add", sender: nil)
     }
 }
