@@ -2,7 +2,7 @@
  議事録ファイルの追加処理
  */
 
-import UIKit
+import RealmSwift
 
 final class MinuteAddViewController: CreationUIViewController {
 
@@ -19,43 +19,62 @@ final class MinuteAddViewController: CreationUIViewController {
     @IBOutlet weak var note: UITextView!
     var isNewObject: Bool!
     var minute: Minute!
-    var isSaved = false
+    var places = [Place]()
+    var attendees = [Attendee]()
     
     // MARK: - VIEWDIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        
+        /// 登録データを参照する
+        let placeData = RealmTask.findAll(RealmModel.place) as! Results<Place>
+        placeData.filter("folderId == %@", minute.folderId).forEach {
+            places.append($0)
+        }
+        let attendeeData = RealmTask.findAll(RealmModel.attendee) as! Results<Attendee>
+        attendeeData.filter("folderId == %@", minute.folderId).forEach {
+            attendees.append($0)
+        }
     }
     
+    // MARK: - 登録した会議場所を取得する
     @IBAction private func pickPlace(_ sender: Any) {
-        showPlaceList()
+        
+        if places.isEmpty {
+            Modal.showError("登録された場所はありません！")
+        } else {
+            showPlaceList(with: places)
+        }
     }
     
+    // MARK: - 登録した人物名を取得する
     @IBAction private func pickAttendee(_ sender: Any) {
-        showAttendeeList()
+        
+        if attendees.isEmpty {
+            Modal.showError("登録された人物名はありません！")
+        } else {
+            showAttendeeList(with: attendees)
+        }
     }
     
     // MARK: - SAVE
     @IBAction private func save(_ sender: Any) {
-        
         saving()
-        
-        if isSaved {
-            dismiss(animated: true, completion: nil)
-        }
     }
+    
     // MARK: - CREATE PDF
     @IBAction private func createPDF(_ sender: Any) {
         
         let text = concatenateText()
-        text.isEmpty ? Modal.showError("処理中にエラーが起きました") : navigatePDF(text)
+        navigatePDF(text)
     }
     
     // MARK: - SHARE DATA
     @IBAction private func share(_ sender: UIButton) {
         
         let text = concatenateText()
-        text.isEmpty ? Modal.showError("処理中にエラーが起きました") : present(ShareData.modeText(text), animated: true, completion: nil)
+        present(ShareData.modeText(text), animated: true, completion: nil)
     }
 }

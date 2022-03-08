@@ -15,7 +15,5 @@ protocol DataReturn2: AnyObject {
 protocol MinuteAddViewSubMethod: AnyObject {
     func saving()
     func concatenateText() -> String
-    func showPlaceList()
-    func showAttendeeList()
     func navigatePDF(_ text: String)
 }
