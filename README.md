@@ -51,4 +51,4 @@ Webアプリ
 [サイト](https://genki-takami-portfolio.netlify.app)
 
 ### 開発者
-[Twitter](https://twitter.com/Gustave_Holmes)
+[Twitter](https://twitter.com/genki_takami)

@@ -1,6 +1,6 @@
 # Psyなび C-mate
 
-## iOS版(MVVMアーキテクチャ&SwiftUIにリファクタリング中)
+## iOS版(MVVMアーキテクチャ & SwiftUI)
 
 ### 説明
 ```

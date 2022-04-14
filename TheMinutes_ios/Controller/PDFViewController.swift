@@ -32,7 +32,7 @@ final class PDFViewController: UIViewController {
         super.viewDidAppear(animated)
         
         /// 共有モーダルを表示
-        let activityVC = ShareData.modePDF(data)
+        let activityVC = ShareData.modePDF(data, view)
         present(activityVC, animated: true, completion: nil)
     }
 }

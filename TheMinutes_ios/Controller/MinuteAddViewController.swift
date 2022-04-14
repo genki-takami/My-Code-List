@@ -75,6 +75,6 @@ final class MinuteAddViewController: CreationUIViewController {
     @IBAction private func share(_ sender: UIButton) {
         
         let text = concatenateText()
-        present(ShareData.modeText(text), animated: true, completion: nil)
+        present(ShareData.modeText(text, view), animated: true, completion: nil)
     }
 }
